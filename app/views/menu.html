@@ -1,0 +1,17 @@
+<md-toolbar class="md-hue-2 md-whiteframe-z3">
+    <div class="md-toolbar-tools">
+        <md-button class="md-primary" ng-click="goalC.removeStepWithId(step._id,$event)">
+            <md-icon><i class="material-icons">add_circle_outline</i></md-icon>
+            Game toevoegen
+        </md-button>
+        <span flex></span>
+        <div class="nav-buttons">
+            {{username}}
+            <md-button class="md-warn md-hue-2 md-raised" ng-click="IndexC.logOut()">Uitloggen</md-button>
+        </div>
+    </div>
+</md-toolbar>
+<!-- This is for showing the content next under the menu bar, it is loaded dynamically -->
+<md-content layout-padding>
+    <div ui-view name="menuContent" flex></div>
+</md-content>
