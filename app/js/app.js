@@ -16,7 +16,6 @@ app.service('DashBoardService', require('./dashboard/dashboard.service.js'));
 app.controller('IndexController', require('./index/index.controller.js'));
 app.controller('AuthController', require('./auth/auth.controller.js'));
 app.controller('DashboardController', require('./dashboard/dashboard.controller.js'));
-app.controller('LandingController', require('./auth/landing.controller.js'));
 
 app.run(function (AuthenticationService, $rootScope) {
     $rootScope.$on('$stateChangeStart', AuthenticationService.authHandler);
@@ -35,22 +34,14 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
     $stateProvider
 
         .state('landing', {
-            url: '/landing',
+            url: '/landing?username&token',
             templateUrl: 'views/login/landing.html',
-            controller: 'LandingController as LandC'
+            controller: 'AuthController as AuthC'
         })
         .state('app', {
             abstract: true,
             templateUrl: 'views/menu.html',
             controller: 'IndexController as IndexC'
-        })
-        .state('app.start', {
-            url: '/start',
-            views: {
-                'menuContent': {
-                    templateUrl: 'views/start.html'
-                }
-            }
         })
         .state('app.dashboard', {
             url: '/dashboard',
@@ -61,15 +52,17 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
                 }
             }
         })
+        /*
         .state('app.callback', {
             url: '/authcallback?username&token',
             views: {
                 'menuContent': {
-                    templateUrl: 'views/start.html',
+                    templateUrl: 'views/dashboard.html',
                     controller: 'AuthController as AuthC'
                 }
             }
-        });
+        })
+        */;
 
     $urlRouterProvider.otherwise('/landing');
 });
