@@ -1,9 +1,15 @@
 module.exports = function ($http) {
     var api = {
         url: 'http://mahjongmayhem.herokuapp.com/',
-        games: 'games'
+        games: 'games',
+        id: null
     }
     var service = {};
+
+    service.setCredentials = function (id) {
+       api.id = id;
+       console.log(api.id);
+    };
     /**
      * pageSize: games on a page
      * pageIndex: which page to go
@@ -14,6 +20,15 @@ module.exports = function ($http) {
      */
     service.getGames = function (callback) {
         $http.get(api.url + api.games)
+            .then(function (response) {
+                callback(response);
+            }, function (error) {
+                callback(error);
+            });
+    };
+    
+    service.getGame = function (callback) {
+        $http.get(api.url + api.games+'/'+api.id)
             .then(function (response) {
                 callback(response);
             }, function (error) {

@@ -30,6 +30,15 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
         .backgroundPalette('grey', {
             'default': '200'
         });
+        
+    $mdThemingProvider.theme('dashboard')
+        .primaryPalette('orange')
+        .accentPalette('lime')
+        .backgroundPalette('grey',
+        {
+            'default': '50'
+        });
+        
 
     $stateProvider
 
@@ -49,6 +58,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
                 'menuContent': {
                     templateUrl: 'views/dashboard.html',
                     controller: 'DashboardController as DashC'
+                }
+                ,
+                'gameDetail': {
+                    templateUrl: 'views/dashboard.html',
+                    controller: 'DashboardController as DashC2'
                 }
             }
         })
