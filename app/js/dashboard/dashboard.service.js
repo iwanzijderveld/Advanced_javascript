@@ -27,8 +27,8 @@ module.exports = function ($http) {
             });
     };
     
-    service.getGame = function (callback) {
-        $http.get(api.url + api.games+'/'+api.id)
+    service.getGame = function (id, callback) {
+        $http.get(api.url + api.games+'/'+ id)
             .then(function (response) {
                 callback(response);
             }, function (error) {

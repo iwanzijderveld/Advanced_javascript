@@ -7,4 +7,5 @@ module.exports = function (AuthenticationService) {
         console.log("Uitloggen");
         AuthenticationService.logOut();
     }
+    this.self.get
 };

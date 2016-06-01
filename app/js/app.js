@@ -30,7 +30,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
         .backgroundPalette('grey', {
             'default': '200'
         });
-        
+
     $mdThemingProvider.theme('dashboard')
         .primaryPalette('orange')
         .accentPalette('lime')
@@ -38,7 +38,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
         {
             'default': '50'
         });
-        
+
 
     $stateProvider
 
@@ -56,13 +56,8 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
             url: '/dashboard',
             views: {
                 'menuContent': {
-                    templateUrl: 'views/dashboard.html',
+                    templateUrl: 'views/dashboard/dashboard.html',
                     controller: 'DashboardController as DashC'
-                }
-                ,
-                'gameDetail': {
-                    templateUrl: 'views/dashboard.html',
-                    controller: 'DashboardController as DashC2'
                 }
             }
         })
@@ -78,5 +73,5 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
         })
         */;
 
-    $urlRouterProvider.otherwise('/landing');
+    $urlRouterProvider.otherwise('/dashboard');
 });
