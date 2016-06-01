@@ -8,10 +8,13 @@ require('angular-material-data-table/dist/md-data-table.min.js');
 
 // Create your app
 var app = angular.module('webs6', ['ngMaterial', 'ui.router', 'ngMessages', 'ngAnimate']);
-
 // SERVICES
 app.service('AuthenticationService', require('./auth/auth.service.js'));
 app.service('DashBoardService', require('./dashboard/dashboard.service.js'));
+
+// Factories
+app.factory('HttpRequestInterceptor', require('./auth/requestinterceptor.factory.js'));
+
 // CONTROLLERS
 app.controller('IndexController', require('./index/index.controller.js'));
 app.controller('AuthController', require('./auth/auth.controller.js'));
@@ -21,8 +24,11 @@ app.run(function (AuthenticationService, $rootScope) {
     $rootScope.$on('$stateChangeStart', AuthenticationService.authHandler);
 });
 
-app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider, $httpProvider) {
+    // Prepare our http requests with Token and username
+    $httpProvider.interceptors.push('HttpRequestInterceptor');
 
+    // Themes
     $mdThemingProvider.theme('login-form')
         .primaryPalette('green', {
             'default': '400',

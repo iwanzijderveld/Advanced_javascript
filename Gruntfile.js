@@ -16,7 +16,7 @@ module.exports = function (grunt) {
                 // This copies all the html, css and js into the dist/ folder
                 expand: true,
                 cwd: 'app/',
-                src: ['**/*.html', '**/*.css', '**/*.controller.js', '**/*.service.js', '**/**/*.svg', '**/*.jpg'],
+                src: ['**/*.html', '**/*.css', '**/*.controller.js', '**/*.service.js','**/*.factory.js', '**/**/*.svg', '**/*.jpg'],
                 dest: 'dist/',
             }
         },

@@ -25,6 +25,17 @@ module.exports = function ($rootScope, $window, $state) {
         $window.location.href = "http://mahjongmayhem.herokuapp.com/auth/avans?callbackUrl=http://localhost:3000/%23/landing";
     };
 
+    service.getToken = function () {
+        if (service.isLoggedIn()) {
+            return _local.token;
+        }
+    };
+    service.getUsername = function () {
+        if (service.isLoggedIn()) {
+            return _local.username;
+        }
+    };
+
     service.logOut = function () {
         $rootScope.username = null;
         $rootScope.token = null;

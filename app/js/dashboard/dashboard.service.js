@@ -7,8 +7,8 @@ module.exports = function ($http) {
     var service = {};
 
     service.setCredentials = function (id) {
-       api.id = id;
-       console.log(api.id);
+        api.id = id;
+        console.log(api.id);
     };
     /**
      * pageSize: games on a page
@@ -26,15 +26,24 @@ module.exports = function ($http) {
                 callback(error);
             });
     };
-    
+
     service.getGame = function (id, callback) {
-        $http.get(api.url + api.games+'/'+ id)
+        $http.get(api.url + api.games + '/' + id)
             .then(function (response) {
                 callback(response);
             }, function (error) {
                 callback(error);
             });
     };
+
+    service.addGame = function (callback) {
+        $http.post(api.url + api.games, { templateName: "Ox", minPlayers: 2, maxPlayers: 32 })
+            .then(function (response) {
+                callback(response);
+            }, function (error) {
+                callback(error);
+            })
+    }
 
 
     return service;
