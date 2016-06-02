@@ -36,8 +36,8 @@ module.exports = function ($http) {
             });
     };
 
-    service.addGame = function (callback) {
-        $http.post(api.url + api.games, { templateName: "Ox", minPlayers: 2, maxPlayers: 32 })
+    service.addGame = function (template, minPlayers, maxPlayers, callback) {
+        $http.post(api.url + api.games, { templateName: template, minPlayers: minPlayers, maxPlayers: maxPlayers })
             .then(function (response) {
                 callback(response);
             }, function (error) {

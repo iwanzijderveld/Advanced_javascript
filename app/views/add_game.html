@@ -6,13 +6,7 @@
                 <md-input-container>
                     <label>Template</label>
                     <md-select ng-model="game.template" required>
-                        <md-option ng-value="Ox">Ox</md-option>
-                        <md-option ng-value="Snake">Snake</md-option>
-                        <md-option ng-value="Dragon">Dragon</md-option>
-                        <md-option ng-value="Shanghai">Shanghai</md-option>
-                        <md-option ng-value="Monkey">Monkey</md-option>
-                        <md-option ng-value="Ram">Ram</md-option>
-                        <md-option ng-value="Rooster">Rooster</md-option>
+                        <md-option ng-value="template.name" ng-repeat="template in IndexC.templates">{{template.name}}</md-option>
                     </md-select>
                 </md-input-container>
             </div>
@@ -28,11 +22,11 @@
                 <md-input-container class="md-block">
                     <label>Maximale aantal spelers</label>
                     <md-select ng-model="game.maxPlayers">
-                        <md-option ng-value="IndexC.maxPlayer">{{IndexC.maxPlayers}}</md-option>
+                        <md-option ng-value="IndexC.maxPlayers">{{IndexC.maxPlayers}}</md-option>
                     </md-select>
                 </md-input-container>
             </div>
-            <md-button class="md-primary md-raised" ng-click=IndexC.addGame(game)"">Aanmaken</md-button>
+            <md-button class="md-primary md-raised" ng-click=IndexC.addGame(game) "">Aanmaken</md-button>
             <md-button class="md-raised" ng-click="IndexC.closeAddGame()">Cancel</md-button>
         </form>
     </div>

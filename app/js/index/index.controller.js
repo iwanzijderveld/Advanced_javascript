@@ -3,6 +3,11 @@ module.exports = function (AuthenticationService, DashBoardService, $mdToast, $m
 
     this.self.minPlayers = 2;
     this.self.maxPlayers = 32;
+    this.self.templates = {
+        0: { name: 'Ox' },
+        1: { name: 'Dragon' },
+        2: { name: 'Rooster' }
+    }
 
     this.self.goToLogin = function () {
         AuthenticationService.goToLogin();
@@ -25,14 +30,15 @@ module.exports = function (AuthenticationService, DashBoardService, $mdToast, $m
         $mdDialog.hide();
     }
 
-    this.self.addGame = function () {
-        DashBoardService.addGame(function (result) {
+    this.self.addGame = function (game) {
+        DashBoardService.addGame(game.template, game.minPlayers, game.maxPlayers, function (result) {
             if (result.statusText == 'OK') {
                 console.log(result.data);
                 $mdToast.show($mdToast.simple().textContent('Nieuwe game aangemaakt'));
+                this.self.closeAddGame();
             }
             else {
-                console.log('Error');
+                console.log(result);
             }
         });
     };
