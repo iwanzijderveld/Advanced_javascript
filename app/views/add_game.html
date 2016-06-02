@@ -3,16 +3,10 @@
         <form name="game">
             Game aanmaken:
             <div class="row">
-                <md-input-container>
+                <md-input-container class="md-block">
                     <label>Template</label>
                     <md-select ng-model="game.template" required>
-                        <md-option ng-value="Ox">Ox</md-option>
-                        <md-option ng-value="Snake">Snake</md-option>
-                        <md-option ng-value="Dragon">Dragon</md-option>
-                        <md-option ng-value="Shanghai">Shanghai</md-option>
-                        <md-option ng-value="Monkey">Monkey</md-option>
-                        <md-option ng-value="Ram">Ram</md-option>
-                        <md-option ng-value="Rooster">Rooster</md-option>
+                        <md-option ng-repeat="template in IndexC.gameTemplates" ng-value="{{template}}">{{template}}</md-option>
                     </md-select>
                 </md-input-container>
             </div>
@@ -20,7 +14,7 @@
                 <md-input-container class="md-block">
                     <label>Minimale aantal spelers</label>
                     <md-select ng-model="game.minPlayers">
-                        <md-option ng-value="IndexC.minPlayers">{{IndexC.minPlayers}}</md-option>
+                        <md-option ng-repeat="minPlayers in IndexC.players" ng-value="{{minPlayers}}">{{minPlayers}}</md-option>
                     </md-select>
                 </md-input-container>
             </div>
@@ -28,11 +22,11 @@
                 <md-input-container class="md-block">
                     <label>Maximale aantal spelers</label>
                     <md-select ng-model="game.maxPlayers">
-                        <md-option ng-value="IndexC.maxPlayer">{{IndexC.maxPlayers}}</md-option>
+                        <md-option ng-repeat="maxPlayers in IndexC.players" ng-value="{{maxPlayers}}">{{maxPlayers}}</md-option>
                     </md-select>
                 </md-input-container>
             </div>
-            <md-button class="md-primary md-raised" ng-click=IndexC.addGame(game)"">Aanmaken</md-button>
+            <md-button class="md-primary md-raised" ng-click=IndexC.addGame(game)>Aanmaken</md-button>
             <md-button class="md-raised" ng-click="IndexC.closeAddGame()">Cancel</md-button>
         </form>
     </div>
