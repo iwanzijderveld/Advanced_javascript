@@ -1,12 +1,14 @@
-module.exports = function (AuthenticationService, DashBoardService, $mdToast, $mdDialog) {
+module.exports = function ($scope, AuthenticationService, DashBoardService, $mdToast, $mdDialog) {
     this.self = this;
 
     this.self.minPlayers = 2;
     this.self.maxPlayers = 32;
-    this.self.templates = {
-        0: { name: 'Ox' },
-        1: { name: 'Dragon' },
-        2: { name: 'Rooster' }
+
+    this.self.players = [];
+    this.self.gameTemplates = ["Snake", "Ox", "Dragon", "Shanghai", "Monkey", "Ram", "Rooster"];
+
+    for (i = 2; i < 33; i++) {
+        this.self.players.push(i);
     }
 
     this.self.goToLogin = function () {
@@ -29,9 +31,10 @@ module.exports = function (AuthenticationService, DashBoardService, $mdToast, $m
     this.self.closeAddGame = function () {
         $mdDialog.hide();
     }
+    this.self.addGame = function () {
+        DashBoardService.setGameSettings("Ox", $scope.game.minPlayers, $scope.game.maxPlayers);
 
-    this.self.addGame = function (game) {
-        DashBoardService.addGame(game.template, game.minPlayers, game.maxPlayers, function (result) {
+        DashBoardService.addGame(function (result) {
             if (result.statusText == 'OK') {
                 console.log(result.data);
                 $mdToast.show($mdToast.simple().textContent('Nieuwe game aangemaakt'));

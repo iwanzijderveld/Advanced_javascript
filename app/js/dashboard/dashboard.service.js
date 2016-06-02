@@ -4,12 +4,25 @@ module.exports = function ($http) {
         games: 'games',
         id: null
     }
+    var game = {
+        template: null,
+        minPlayers: null,
+        maxPlayers: null
+    }
     var service = {};
 
     service.setCredentials = function (id) {
         api.id = id;
         console.log(api.id);
     };
+
+    service.setGameSettings = function (template, minPlayers, maxPlayers) {
+        game.template = template;
+        game.minPlayers = minPlayers;
+        game.maxPlayers = maxPlayers;
+        console.log(template + minPlayers + maxPlayers);
+    };
+
     /**
      * pageSize: games on a page
      * pageIndex: which page to go
@@ -36,8 +49,9 @@ module.exports = function ($http) {
             });
     };
 
-    service.addGame = function (template, minPlayers, maxPlayers, callback) {
-        $http.post(api.url + api.games, { templateName: template, minPlayers: minPlayers, maxPlayers: maxPlayers })
+
+    service.addGame = function (callback) {
+        $http.post(api.url + api.games, { templateName: game.template, minPlayers: game.minPlayers, maxPlayers: game.maxPlayers })
             .then(function (response) {
                 callback(response);
             }, function (error) {
