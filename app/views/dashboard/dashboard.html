@@ -15,13 +15,20 @@
     </div>
     <div layout="column" flex>
         <md-card>
-            
+            <md-card-title>
+                Hello world
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button ng-click="DashC.startGame()" class="md-raised md-accent">Start</md-button>
+            </md-card-actions>
         </md-card>
+
         <md-list>
             <md-list-item class="md-3-line" ng-repeat="player in DashC.game.players">
                 <div class="md-list-item-text">
                     <h4>{{player.name}}</h4>
                 </div>
+                <md-divider ng-if="!$last"></md-divider>
             </md-list-item>
         </md-list>
     </div>

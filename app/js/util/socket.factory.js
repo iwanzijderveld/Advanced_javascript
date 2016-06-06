@@ -13,8 +13,20 @@ module.exports = function ($mdToast) {
     service.connectGame("5755595475c3971100c2c32f");
 
     socket.on('start', function () {
-        console.log('game' + gameid + 'started');
+        console.log(gameid + ' Started');
     });
-
+    
+    socket.on('end', function () {
+        console.log(gameid + ' Ended');
+    });
+    
+    socket.on('match', function () {
+        console.log(gameid + ' Matched Tiles');
+    });
+    
+    socket.on('playerjoined', function () {
+        console.log(gameid + ' playerjoined');
+    });
+    
     return service;
 };
