@@ -10,7 +10,6 @@ module.exports = function (DashBoardService, $mdToast, Socket) {
 
     DashBoardService.getGames(function (result) {
         if (result.statusText == 'OK') {
-            console.log(result.data);
             self.games = result.data;
         }
         else {

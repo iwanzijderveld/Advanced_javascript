@@ -13,8 +13,8 @@ app.service('AuthenticationService', require('./auth/auth.service.js'));
 app.service('DashBoardService', require('./dashboard/dashboard.service.js'));
 
 // Factories
-app.factory('HttpRequestInterceptor', require('./utility/requestinterceptor.factory.js'));
-app.factory('Socket', require('./utility/socket.factory.js'));
+app.factory('HttpRequestInterceptor', require('./util/requestinterceptor.factory.js'));
+app.factory('Socket', require('./util/socket.factory.js'));
 
 // CONTROLLERS
 app.controller('IndexController', require('./index/index.controller.js'));
