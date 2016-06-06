@@ -1,4 +1,4 @@
-module.exports = function (DashBoardService) {
+module.exports = function (DashBoardService, $mdToast, Socket) {
     var self = this;
     self.games = {};
     self.game = {};
@@ -7,6 +7,7 @@ module.exports = function (DashBoardService) {
         //Parse the whole JSON object
         self.game = game;
     };
+
     DashBoardService.getGames(function (result) {
         if (result.statusText == 'OK') {
             console.log(result.data);
@@ -26,6 +27,17 @@ module.exports = function (DashBoardService) {
             }
             else {
                 console.log('Error');
+            }
+        });
+    };
+    self.joinGame = function (id) {
+        console.log(id);
+        DashBoardService.joinGame(id, function (result) {
+            if (result.statusText == 'OK') {
+                $mdToast.show($mdToast.simple().textContent('Joined game'));
+            }
+            else {
+                $mdToast.show($mdToast.simple().textContent(result.data.message));
             }
         });
     };

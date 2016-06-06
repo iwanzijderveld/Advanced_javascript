@@ -1,7 +1,8 @@
 module.exports = function ($http) {
     var api = {
-        url: 'http://mahjongmayhem.herokuapp.com/',
-        games: 'games',
+        url: 'http://mahjongmayhem.herokuapp.com',
+        games: '/games',
+        players: '/players',
         id: null
     }
     var game = {
@@ -57,7 +58,16 @@ module.exports = function ($http) {
             }, function (error) {
                 callback(error);
             })
-    }
+    };
+
+    service.joinGame = function (id, callback) {
+        $http.post(api.url + api.games + '/' + id + api.players)
+            .then(function (response) {
+                callback(response);
+            }, function (error) {
+                callback(error);
+            })
+    };
 
 
     return service;
