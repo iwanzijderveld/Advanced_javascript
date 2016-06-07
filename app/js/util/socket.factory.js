@@ -10,7 +10,7 @@ module.exports = function ($mdToast) {
         gameid = id;
     };
 
-    service.connectGame("5755595475c3971100c2c32f");
+    service.connectGame("575683276e6d1e1100ef41f1");
 
     socket.on('start', function () {
         console.log(gameid + ' Started');
@@ -24,7 +24,7 @@ module.exports = function ($mdToast) {
         console.log(gameid + ' Matched Tiles');
     });
     
-    socket.on('playerjoined', function () {
+    socket.on('playerJoined', function () {
         console.log(gameid + ' playerjoined');
     });
     
