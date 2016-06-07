@@ -1,4 +1,4 @@
-module.exports = function ($scope, AuthenticationService, DashBoardService, $mdToast, $mdDialog) {
+module.exports = function ($scope, AuthenticationService, DashBoardService, $mdToast, $mdDialog, $state) {
     this.self = this;
 
     this.self.minPlayers = 2;
@@ -38,7 +38,8 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
             if (result.statusText == 'OK') {
                 console.log(result.data);
                 $mdToast.show($mdToast.simple().textContent('Nieuwe game aangemaakt'));
-                this.self.closeAddGame();
+                $mdDialog.hide();
+                $state.go('app.dashboard');
             }
             else {
                 console.log(result);

@@ -57,7 +57,7 @@ module.exports = function ($http) {
                 callback(response);
             }, function (error) {
                 callback(error);
-            })
+            });
     };
 
     service.joinGame = function (id, callback) {
@@ -66,7 +66,16 @@ module.exports = function ($http) {
                 callback(response);
             }, function (error) {
                 callback(error);
-            })
+            });
+    };
+
+    service.startGame = function (id, callback) {
+        $http.post(api.url + api.games + '/' + id + '/start')
+            .then(function (response) {
+                callback(response);
+            }, function (error) {
+                callback(error);
+            });
     };
 
 

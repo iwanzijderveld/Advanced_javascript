@@ -8,36 +8,54 @@ module.exports = function (DashBoardService, $mdToast, Socket) {
         self.game = game;
     };
 
-    DashBoardService.getGames(function (result) {
-        if (result.statusText == 'OK') {
-            self.games = result.data;
-        }
-        else {
-            console.log('Error');
-        }
-    });
-
-    self.getGame = function (game) {
-        console.log(game.id);
-        DashBoardService.getGame(game.id, function (result) {
+    self.getGames = function () {
+        DashBoardService.getGames(function (result) {
             if (result.statusText == 'OK') {
-                console.log(result.data);
-                self.game = result.data;
-            }
-            else {
-                console.log('Error');
-            }
-        });
-    };
-    self.joinGame = function (id) {
-        console.log(id);
-        DashBoardService.joinGame(id, function (result) {
-            if (result.statusText == 'OK') {
-                $mdToast.show($mdToast.simple().textContent('Joined game'));
+                self.games = result.data;
             }
             else {
                 $mdToast.show($mdToast.simple().textContent(result.data.message));
             }
         });
     };
+
+    self.getGame = function (id) {
+        console.log(id);
+        DashBoardService.getGame(id, function (result) {
+            if (result.statusText == 'OK') {
+                console.log(result.data);
+                self.game = result.data;
+            }
+            else {
+                $mdToast.show($mdToast.simple().textContent(result.data.message));
+            }
+        });
+    };
+
+    self.startGame = function (gameId) {
+        DashBoardService.startGame(gameId, function (result) {
+            if (result.statusText == 'OK') {
+                $mdToast.show($mdToast.simple().textContent("Game Started!"));
+            }
+            else {
+                $mdToast.show($mdToast.simple().textContent(result.data.message));
+            }
+        })
+    };
+
+    self.joinGame = function (id) {
+        console.log(id);
+        DashBoardService.joinGame(id, function (result) {
+            if (result.statusText == 'OK') {
+                $mdToast.show($mdToast.simple().textContent('Joined game!'));
+                self.getGame(id);
+                self.getGames();
+            }
+            else {
+                $mdToast.show($mdToast.simple().textContent(result.data.message));
+            }
+        });
+    };
+    // Load data automatically when the user opens page
+    self.getGames();
 };

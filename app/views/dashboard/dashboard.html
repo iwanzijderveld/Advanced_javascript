@@ -13,13 +13,13 @@
             </md-list-item>
         </md-list>
     </div>
-    <div layout="column" flex>
+    <div layout="column" flex ng-if="DashC.game.id != undefined">
         <md-card>
             <md-card-title>
-                Hello world
+                {{DashC.game.id}}
             </md-card-title>
             <md-card-actions layout="row" layout-align="end center">
-                <md-button ng-click="DashC.startGame()" class="md-raised md-accent">Start</md-button>
+                <md-button ng-click="DashC.startGame(DashC.game.id)" ng-if="DashC.game.id != undefined" class="md-raised md-accent">Start</md-button>
             </md-card-actions>
         </md-card>
 
