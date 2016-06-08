@@ -1,4 +1,4 @@
-module.exports = function (DashBoardService, $mdToast, Socket) {
+module.exports = function (DashBoardService, $mdToast, Socket, $state) {
     var self = this;
     self.games = {};
     self.game = {};
@@ -36,6 +36,7 @@ module.exports = function (DashBoardService, $mdToast, Socket) {
         DashBoardService.startGame(gameId, function (result) {
             if (result.statusText == 'OK') {
                 $mdToast.show($mdToast.simple().textContent("Game Started!"));
+                $state.go('app.game');
             }
             else {
                 $mdToast.show($mdToast.simple().textContent(result.data.message));
