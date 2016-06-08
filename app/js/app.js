@@ -15,6 +15,7 @@ app.service('APIService', require('./util/api.service.js'));
 app.service('AuthenticationService', require('./auth/auth.service.js'));
 app.service('DashBoardService', require('./dashboard/dashboard.service.js'));
 app.service('GameService', require('./game/game.service.js'));
+app.service('PreferenceService', require('./preference/preference.service.js'));
 
 // Factories
 app.factory('HttpRequestInterceptor', require('./util/requestinterceptor.factory.js'));
@@ -25,8 +26,11 @@ app.controller('IndexController', require('./index/index.controller.js'));
 app.controller('AuthController', require('./auth/auth.controller.js'));
 app.controller('DashboardController', require('./dashboard/dashboard.controller.js'));
 app.controller('GameController', require('./game/game.controller.js'));
-app.run(function (AuthenticationService, $rootScope) {
+
+
+app.run(function (AuthenticationService, $rootScope, PreferenceService) {
     $rootScope.$on('$stateChangeStart', AuthenticationService.authHandler);
+    $rootScope.Style = PreferenceService.getBlockThemePreference();
 });
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider, $httpProvider) {
