@@ -3,11 +3,10 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
 
     this.self.minPlayers = 2;
     this.self.maxPlayers = 32;
-
     this.self.players = [];
     this.self.gameTemplates = ["Snake", "Ox", "Dragon", "Shanghai", "Monkey", "Ram", "Rooster"];
 
-    for (i = 2; i < 33; i++) {
+    for (i = this.self.minPlayers; i < this.self.maxPlayers+1; i++) {
         this.self.players.push(i);
     }
 
@@ -32,7 +31,7 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
         $mdDialog.hide();
     }
     this.self.addGame = function () {
-        DashBoardService.setGameSettings("Ox", $scope.game.minPlayers, $scope.game.maxPlayers);
+        DashBoardService.setGameSettings($scope.game.template, $scope.game.minPlayers, $scope.game.maxPlayers);
 
         DashBoardService.addGame(function (result) {
             if (result.statusText == 'OK') {
