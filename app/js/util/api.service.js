@@ -14,7 +14,7 @@ module.exports = function () {
         return _api.base + _api.game.base + '/' + id;
     };
     service.tiles = function (id) {
-        return _gameBase(id) + api.game.tiles;
+        return _gameBase(id) + _api.game.tiles;
     };
 
     service.games = function () {
@@ -25,8 +25,11 @@ module.exports = function () {
         return _gameBase(id);
     };
 
-    service.players = function (id) {
-        return api.base + api.game.base + '/' + id + api.game.players
+    service.gamePlayers = function (id) {
+        return _gameBase(id) + api.game.players
+    };
+    service.gameStart = function (id) {
+        return _gameBase(id) + _api.game.start;
     };
     return service;
 };

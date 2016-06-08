@@ -1,8 +1,5 @@
-module.exports = function ($http) {
+module.exports = function ($http, APIService) {
     var api = {
-        url: 'http://mahjongmayhem.herokuapp.com',
-        games: '/games',
-        players: '/players',
         id: null
     }
     var game = {
@@ -33,7 +30,7 @@ module.exports = function ($http) {
      * state: game state filter
      */
     service.getGames = function (callback) {
-        $http.get(api.url + api.games)
+        $http.get(APIService.games())
             .then(function (response) {
                 callback(response);
             }, function (error) {
@@ -42,7 +39,7 @@ module.exports = function ($http) {
     };
 
     service.getGame = function (id, callback) {
-        $http.get(api.url + api.games + '/' + id)
+        $http.get(APIService.game(id))
             .then(function (response) {
                 callback(response);
             }, function (error) {
@@ -52,7 +49,7 @@ module.exports = function ($http) {
 
 
     service.addGame = function (callback) {
-        $http.post(api.url + api.games, { templateName: game.template, minPlayers: game.minPlayers, maxPlayers: game.maxPlayers })
+        $http.post(APIService.games, { templateName: game.template, minPlayers: game.minPlayers, maxPlayers: game.maxPlayers })
             .then(function (response) {
                 callback(response);
             }, function (error) {
@@ -61,7 +58,7 @@ module.exports = function ($http) {
     };
 
     service.joinGame = function (id, callback) {
-        $http.post(api.url + api.games + '/' + id + api.players)
+        $http.post(APIService.gamePlayers(id))
             .then(function (response) {
                 callback(response);
             }, function (error) {
@@ -70,7 +67,7 @@ module.exports = function ($http) {
     };
 
     service.startGame = function (id, callback) {
-        $http.post(api.url + api.games + '/' + id + '/start')
+        $http.post(APIService.gameStart(id))
             .then(function (response) {
                 callback(response);
             }, function (error) {

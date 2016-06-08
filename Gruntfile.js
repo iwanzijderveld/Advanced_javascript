@@ -16,8 +16,19 @@ module.exports = function (grunt) {
                 // This copies all the html, css and js into the dist/ folder
                 expand: true,
                 cwd: 'app/',
-                src: ['**/*.html', '**/*.css', '**/*.controller.js', '**/*.service.js','**/*.factory.js', '**/**/*.svg', '**/*.jpg'],
+                src: ['**/*.html', '**/*.css', '**/*.controller.js', '**/*.service.js', '**/*.factory.js', '**/*.directive.js', '**/**/*.svg', '**/*.jpg', '**/*.png'],
                 dest: 'dist/',
+            }
+        },
+        sass: {
+            dist: {
+                options: {
+                    style: 'expanded'
+                },
+                files: {
+                    'dist/css/tilelist1.css': 'app/css/tilelist1.scss',
+                    'dist/css/tilelist2.css': 'app/css/tilelist2.scss'
+                }
             }
         },
         watch: {
@@ -32,6 +43,10 @@ module.exports = function (grunt) {
             css: {
                 files: 'app/**/*.css',
                 tasks: 'copy'
+            },
+            scss: {
+                files: 'app/**/*.scss',
+                tasks: 'sass'
             }
         },
         'http-server': {
@@ -49,7 +64,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-http-server');
+    grunt.loadNpmTasks('grunt-contrib-sass');
 
     // The default tasks to run when you type: grunt
-    grunt.registerTask('default', ['browserify', 'copy', 'http-server', 'watch']);
+    grunt.registerTask('default', ['browserify', 'copy', 'sass', 'http-server', 'watch']);
 };

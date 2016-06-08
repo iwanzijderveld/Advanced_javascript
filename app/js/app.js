@@ -8,6 +8,8 @@ require('angular-material-data-table/dist/md-data-table.min.js');
 
 // Create your app
 var app = angular.module('webs6', ['ngMaterial', 'ui.router', 'ngMessages', 'ngAnimate']);
+// DIRECTIVES
+app.directive('tile', require('./directives/tile.directive.js'));
 // SERVICES
 app.service('APIService', require('./util/api.service.js'));
 app.service('AuthenticationService', require('./auth/auth.service.js'));
