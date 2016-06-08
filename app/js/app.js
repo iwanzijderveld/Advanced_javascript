@@ -9,8 +9,10 @@ require('angular-material-data-table/dist/md-data-table.min.js');
 // Create your app
 var app = angular.module('webs6', ['ngMaterial', 'ui.router', 'ngMessages', 'ngAnimate']);
 // SERVICES
+app.service('APIService', require('./util/api.service.js'));
 app.service('AuthenticationService', require('./auth/auth.service.js'));
 app.service('DashBoardService', require('./dashboard/dashboard.service.js'));
+app.service('GameService', require('./game/game.service.js'));
 
 // Factories
 app.factory('HttpRequestInterceptor', require('./util/requestinterceptor.factory.js'));
@@ -20,7 +22,7 @@ app.factory('Socket', require('./util/socket.factory.js'));
 app.controller('IndexController', require('./index/index.controller.js'));
 app.controller('AuthController', require('./auth/auth.controller.js'));
 app.controller('DashboardController', require('./dashboard/dashboard.controller.js'));
-
+app.controller('GameController', require('./game/game.controller.js'));
 app.run(function (AuthenticationService, $rootScope) {
     $rootScope.$on('$stateChangeStart', AuthenticationService.authHandler);
 });
@@ -68,17 +70,16 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
                 }
             }
         })
-        /*
-        .state('app.callback', {
-            url: '/authcallback?username&token',
+        .state('app.game', {
+            url: '/game/:id',
             views: {
                 'menuContent': {
-                    templateUrl: 'views/dashboard.html',
-                    controller: 'AuthController as AuthC'
+                    templateUrl: 'views/game/gamepage.html',
+                    controller: 'GameController as GameC'
                 }
             }
         })
-        */;
+        ;
 
     $urlRouterProvider.otherwise('/dashboard');
 });
