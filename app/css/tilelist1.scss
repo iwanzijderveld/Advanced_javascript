@@ -1,0 +1,27 @@
+$file_path: "../img/SpritesSD.png";
+$toDown: 0;
+$circles: 9;
+$bamboos: 9;
+$characters: 9;
+$winds: North East South West;
+$dragons: Green Red White;
+$flowers: Plum Chrysantememum Orchid Bamboo;
+$seasons: Spring Summer Autumn Winter;
+$tilesuits: Bamboo Circle Character Dragon Wind Season Flower;
+
+.tile{
+    position: absolute;
+    width: 75px;
+    height: 95px;
+}
+@each $suit in titlesuits{
+    @if $suit == Bamboo{
+        @for $i from 1 through $bamboos{
+            .#{$suit+"-"+$i}{
+                @extend .tile;
+            }
+        }
+    }
+}
+
+

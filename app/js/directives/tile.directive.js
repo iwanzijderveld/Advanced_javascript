@@ -3,10 +3,14 @@ module.exports = function () {
         restrict: 'E',
         link: function (scope, element) {
             var tile = scope.tile;
+            console.log(tile.tile.name);
+            var leftPos = 37;
+            var topPos = 45.5;
+            var zPos = 3;
 
-            element.css({ 'left': (tile.xPos) * 37 + 'px', 'top': tile.yPos * 45.5 + 'px', 'z-index': tile.zPos });
+            element.css({ 'left': (tile.xPos) * leftPos + 'px', 'top': tile.yPos * topPos + 'px', 'z-index': tile.zPos });
             if (scope.tile.zPos > 0) {
-                element.css({ 'left': ((tile.xPos) * 37 + (tile.zPos * 3)) + 'px', 'top': (tile.yPos * 45.5 - (tile.zPos * 3)) + 'px' })
+                element.css({ 'left': ((tile.xPos) * leftPos + (tile.zPos * zPos)) + 'px', 'top': (tile.yPos * topPos - (tile.zPos * zPos)) + 'px' })
             }
             var className = tile.tile.suit + "-" + tile.tile.name;
             element.addClass(className)
