@@ -61,7 +61,7 @@ module.exports = function (DashBoardService, $mdToast, Socket, $state) {
 
     //Zit een bug in. Hij laat 3 games van je bij Alle games zien ipv MyGames
     self.setList = function (game, allPlayers) {
-        var isUser = false;
+        var isUser;
         if(!allPlayers){
             for(i=0; i<game.players.length; i++){
                 if(game.players[i].name=='Iwan van Zijderveld'){
@@ -73,7 +73,6 @@ module.exports = function (DashBoardService, $mdToast, Socket, $state) {
         }
         return isUser;
     };
-
 
     // Load data automatically when the user opens page
     self.getGames();

@@ -52,8 +52,6 @@
                             <md-list>                                
                                 <md-list-item class="md-3-line" ng-repeat="game in DashC.games" ng-click="DashC.setGame(game)" ng-if="DashC.setList(game,lobby.allPlayers) && game.state==gameState.title">
                                     <div class="md-list-item-text">
-                                        {{lobby.allPlayers}}
-                                        {{DashC.checkOwn()}}
                                         <h3>{{game.createdBy.name}}</h3>
                                         <h4>{{game.state}}</h4>
                                         <h4>{{game.gameTemplate.id}}</h4>
