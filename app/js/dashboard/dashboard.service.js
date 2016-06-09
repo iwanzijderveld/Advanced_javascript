@@ -18,7 +18,6 @@ module.exports = function ($http, APIService) {
         game.template = template;
         game.minPlayers = minPlayers;
         game.maxPlayers = maxPlayers;
-        console.log(template + minPlayers + maxPlayers);
     };
 
     /**

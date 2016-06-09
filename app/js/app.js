@@ -47,8 +47,8 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
         });
 
     $mdThemingProvider.theme('dashboard')
-        .primaryPalette('orange')
-        .accentPalette('lime')
+        .primaryPalette('green')
+        .accentPalette('pink')
         .backgroundPalette('grey',
         {
             'default': '50'

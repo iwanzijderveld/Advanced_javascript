@@ -12,6 +12,7 @@ module.exports = function (DashBoardService, $mdToast, Socket, $state) {
         DashBoardService.getGames(function (result) {
             if (result.statusText == 'OK') {
                 self.games = result.data;
+                console.log(self.games);
             }
             else {
                 $mdToast.show($mdToast.simple().textContent(result.data.message));
@@ -57,6 +58,23 @@ module.exports = function (DashBoardService, $mdToast, Socket, $state) {
             }
         });
     };
+
+    //Zit een bug in. Hij laat 3 games van je bij Alle games zien ipv MyGames
+    self.setList = function (game, allPlayers) {
+        var isUser = false;
+        if(!allPlayers){
+            for(i=0; i<game.players.length; i++){
+                if(game.players[i].name=='Iwan van Zijderveld'){
+                   isUser = true;
+                }
+            }
+        }else{
+            isUser=true;
+        }
+        return isUser;
+    };
+
+
     // Load data automatically when the user opens page
     self.getGames();
 };
