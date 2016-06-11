@@ -30,7 +30,7 @@ app.controller('GameController', require('./game/game.controller.js'));
 
 app.run(function (AuthenticationService, $rootScope, PreferenceService) {
     $rootScope.$on('$stateChangeStart', AuthenticationService.authHandler);
-    $rootScope.Style = PreferenceService.getBlockThemePreference();
+    PreferenceService.preferenceHandler();
 });
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider, $httpProvider) {

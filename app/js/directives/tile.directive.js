@@ -3,7 +3,6 @@ module.exports = function () {
         restrict: 'E',
         link: function (scope, element) {
             var tile = scope.tile;
-            console.log(tile.tile.name);
             var leftPos = 37;
             var topPos = 45.5;
             var zPos = 3;

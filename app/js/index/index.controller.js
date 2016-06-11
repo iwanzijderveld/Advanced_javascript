@@ -44,7 +44,7 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
 
     this.self.showAddGame = function () {
         $mdDialog.show({
-            templateUrl: 'views/add_game.html',
+            templateUrl: 'views/dashboard/add_game.html',
             controller: 'IndexController as IndexC',
             parent: angular.element(document.body),
             clickOutsideToClose: false

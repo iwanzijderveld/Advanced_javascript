@@ -1,12 +1,16 @@
-module.exports = function(){
+module.exports = function($rootScope){
     var service = {};
 
-    service.getThemePreference = function () {
+    getThemePreference = function () {
         return localStorage.getItem('Theme');
     };
 
-    service.getBlockThemePreference = function () {
+    getBlockThemePreference = function () {
         return localStorage.getItem('BlockTheme');
+    };
+
+    service.preferenceHandler = function () {
+        $rootScope.BlockStyle = getBlockThemePreference();
     };
 
     
