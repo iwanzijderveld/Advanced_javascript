@@ -31,7 +31,7 @@ module.exports = function () {
     };
 
     service.gamePlayers = function (id) {
-        return _gameBase(id) + api.game.players
+        return _gameBase(id) + _api.game.players
     };
     service.gameStart = function (id) {
         return _gameBase(id) + _api.game.start;

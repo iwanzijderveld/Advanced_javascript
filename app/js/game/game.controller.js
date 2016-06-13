@@ -1,4 +1,4 @@
-module.exports = function (GameService, $stateParams, ) {
+module.exports = function (GameService, $stateParams ) {
     var self = this;
     self.tiles = {};
     self.deletedTiles = {};

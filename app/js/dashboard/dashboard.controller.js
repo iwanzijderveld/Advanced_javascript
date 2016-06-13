@@ -37,7 +37,7 @@ module.exports = function (DashBoardService, $mdToast, Socket, $state) {
         DashBoardService.startGame(gameId, function (result) {
             if (result.statusText == 'OK') {
                 $mdToast.show($mdToast.simple().textContent("Game Started!"));
-                $state.go('app.game');
+                $state.go('app.game', { id: gameId });
             }
             else {
                 $mdToast.show($mdToast.simple().textContent(result.data.message));
@@ -62,14 +62,14 @@ module.exports = function (DashBoardService, $mdToast, Socket, $state) {
     //Zit een bug in. Hij laat 3 games van je bij Alle games zien ipv MyGames
     self.setList = function (game, allPlayers) {
         var isUser;
-        if(!allPlayers){
-            for(i=0; i<game.players.length; i++){
-                if(game.players[i].name=='Iwan van Zijderveld'){
-                   isUser = true;
+        if (!allPlayers) {
+            for (i = 0; i < game.players.length; i++) {
+                if (game.players[i].name == 'Iwan van Zijderveld') {
+                    isUser = true;
                 }
             }
-        }else{
-            isUser=true;
+        } else {
+            isUser = true;
         }
         return isUser;
     };
