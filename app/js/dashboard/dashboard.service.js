@@ -48,7 +48,7 @@ module.exports = function ($http, APIService) {
 
 
     service.addGame = function (callback) {
-        $http.post(APIService.games, { templateName: game.template, minPlayers: game.minPlayers, maxPlayers: game.maxPlayers })
+        $http.post(APIService.games(), { templateName: game.template, minPlayers: game.minPlayers, maxPlayers: game.maxPlayers })
             .then(function (response) {
                 callback(response);
             }, function (error) {

@@ -1,4 +1,4 @@
- <md-toolbar class="md-hue-2 md-whiteframe-z3">
+<md-toolbar class="md-hue-2 md-whiteframe-z3">
     <div class="md-toolbar-tools">
         <md-button class="md-primary" ng-click="IndexC.showAddGame()">
             <md-icon><i class="material-icons">add_circle_outline</i></md-icon>
@@ -6,6 +6,9 @@
         </md-button>
         <span flex></span>
         <div class="nav-buttons">
+            <md-button class="md-primary" ng-click="IndexC.goToPref()">
+                <md-icon><i class="material-icons">account_circle</i></md-icon>
+            </md-button>
             {{username}}
             <md-button class="md-warn md-hue-2 md-raised" ng-click="IndexC.logOut()">Uitloggen</md-button>
         </div>

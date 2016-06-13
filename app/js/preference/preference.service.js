@@ -1,4 +1,4 @@
-module.exports = function($rootScope){
+module.exports = function ($rootScope) {
     var service = {};
 
     getThemePreference = function () {
@@ -10,9 +10,17 @@ module.exports = function($rootScope){
     };
 
     service.preferenceHandler = function () {
-        $rootScope.BlockStyle = getBlockThemePreference();
+        if (getBlockThemePreference() == undefined) {
+            localStorage.setItem('BlockTheme', 'tilelist2');
+        }
+        if (getThemePreference() == undefined) {
+            localStorage.setItem('Theme', 'default');
+        }
+
+        $rootScope.BlockTheme = getBlockThemePreference();
+        $rootScope.Theme = getThemePreference();
     };
 
-    
+
     return service;
 };

@@ -1,4 +1,4 @@
-module.exports = function ($scope, AuthenticationService, DashBoardService, $mdToast, $mdDialog, $state) {
+module.exports = function ($scope, AuthenticationService, DashBoardService, $mdToast, $mdDialog) {
     this.self = this;
 
     this.self.minPlayers = 2;
@@ -6,30 +6,30 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
     this.self.players = [];
     this.self.gameTemplates = ["Snake", "Ox", "Dragon", "Shanghai", "Monkey", "Ram", "Rooster"];
     this.self.lobby = [
-      {
-        title: 'Games',
-        games: [{title:'open'}],
-        allPlayers: true
-      },
-      {
-        title: 'My games',
-        games: [{title:'open'},
-                {title:'playing'}],
-        allPlayers: false
-      },
-      {
-        title: 'Spectate',
-        games: [{title:'playing'}],
-        allPlayers: true
-      },
-      {
-        title: 'History',
-        games: [{title:'finished'}],
-        allPlayers: true
-      }
+        {
+            title: 'Games',
+            games: [{ title: 'open' }],
+            allPlayers: true
+        },
+        {
+            title: 'My games',
+            games: [{ title: 'open' },
+                { title: 'playing' }],
+            allPlayers: false
+        },
+        {
+            title: 'Spectate',
+            games: [{ title: 'playing' }],
+            allPlayers: true
+        },
+        {
+            title: 'History',
+            games: [{ title: 'finished' }],
+            allPlayers: true
+        }
     ];
 
-    for (i = this.self.minPlayers; i < this.self.maxPlayers+1; i++) {
+    for (i = this.self.minPlayers; i < this.self.maxPlayers + 1; i++) {
         this.self.players.push(i);
     }
 
@@ -50,6 +50,14 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
             clickOutsideToClose: false
         });
     };
+    this.self.goToPref = function () {
+        $mdDialog.show({
+            templateUrl: 'views/preference/preferences.html',
+            controller: 'PreferenceController as PrefC',
+            parent: angular.element(document.body),
+            clickOutsideToClose: false
+        });
+    }
     this.self.closeAddGame = function () {
         $mdDialog.hide();
     }

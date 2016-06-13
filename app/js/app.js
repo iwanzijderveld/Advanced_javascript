@@ -26,6 +26,7 @@ app.controller('IndexController', require('./index/index.controller.js'));
 app.controller('AuthController', require('./auth/auth.controller.js'));
 app.controller('DashboardController', require('./dashboard/dashboard.controller.js'));
 app.controller('GameController', require('./game/game.controller.js'));
+app.controller('PreferenceController', require('./preference/preference.controller.js'));
 
 
 app.run(function (AuthenticationService, $rootScope, PreferenceService) {
@@ -38,13 +39,15 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
     $httpProvider.interceptors.push('HttpRequestInterceptor');
 
     // Themes
-    $mdThemingProvider.theme('login-form')
+    $mdThemingProvider.theme('default')
         .primaryPalette('green', {
             'default': '400',
         })
         .backgroundPalette('grey', {
             'default': '200'
         });
+    $mdThemingProvider.theme('blue')
+        .primaryPalette('blue');
 
     $mdThemingProvider.theme('dashboard')
         .primaryPalette('green')
@@ -54,6 +57,8 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
             'default': '50'
         });
 
+    //$mdThemingProvider.setDefaultTheme('default');
+    $mdThemingProvider.alwaysWatchTheme(true);
 
     $stateProvider
 
@@ -85,6 +90,16 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
                 }
             }
         })
+        /*
+        .state('app.preference', {
+            url: '/preferences',
+            views: {
+                'menuContent': {
+                    templateUrl: 'views/preference/preferences.html',
+                    controller: 'PreferenceController as PrefC'
+                }
+            }
+        })*/
         ;
 
     $urlRouterProvider.otherwise('/dashboard');
