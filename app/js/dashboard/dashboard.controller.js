@@ -59,12 +59,11 @@ module.exports = function (DashBoardService, $mdToast, Socket, $state) {
         });
     };
 
-    //Zit een bug in. Hij laat 3 games van je bij Alle games zien ipv MyGames
-    self.setList = function (game, allPlayers) {
+    self.setList = function (game, allPlayers,username) {
         var isUser;
         if (!allPlayers) {
             for (i = 0; i < game.players.length; i++) {
-                if (game.players[i].name == 'Iwan van Zijderveld') {
+                if (game.players[i]._id == username) {
                     isUser = true;
                 }
             }

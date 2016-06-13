@@ -13,7 +13,7 @@
             <div class="row">
                 <md-input-container class="md-block">
                     <label>Minimale aantal spelers</label>
-                    <md-select ng-model="game.minPlayers">
+                    <md-select ng-model="game.minPlayers" required>
                         <md-option ng-repeat="minPlayers in IndexC.players" ng-value="{{minPlayers}}">{{minPlayers}}</md-option>
                     </md-select>
                 </md-input-container>
@@ -21,12 +21,12 @@
             <div class="row">
                 <md-input-container class="md-block">
                     <label>Maximale aantal spelers</label>
-                    <md-select ng-model="game.maxPlayers">
+                    <md-select ng-model="game.maxPlayers" required>
                         <md-option ng-repeat="maxPlayers in IndexC.players" ng-value="{{maxPlayers}}">{{maxPlayers}}</md-option>
                     </md-select>
                 </md-input-container>
             </div>
-            <md-button class="md-primary md-raised" ng-click="IndexC.addGame(game)"s>Aanmaken</md-button>
+            <md-button class="md-primary md-raised" ng-click="IndexC.addGame(game)">Aanmaken</md-button>
             <md-button class="md-raised" ng-click="IndexC.closeAddGame()">Cancel</md-button>
         </form>
     </div>

@@ -19,6 +19,17 @@ module.exports = function ($http, APIService) {
                 callback(error);
             });
     }
+    
+    // miss dat je de juiste gameid kunt halen via dashboard, anders duplicated functie
+    service.getGame = function (id, callback) {
+        console.log("current game: " + id);
+        $http.get(APIService.gamePlayers(id))
+            .then(function (response) {
+                callback(response);
+            }, function (error) {
+                callback(error);
+            });
+    };
 
     return service;
 };

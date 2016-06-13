@@ -50,7 +50,7 @@
                     <md-content md-theme="dashboard" layout="row" layout-xs="column">
                         <div layout="column" flex>
                             <md-list>                                
-                                <md-list-item class="md-3-line" ng-repeat="game in DashC.games" ng-click="DashC.setGame(game)" ng-if="DashC.setList(game,lobby.allPlayers) && game.state==gameState.title">
+                                <md-list-item class="md-3-line" ng-repeat="game in DashC.games" ng-click="DashC.setGame(game)" ng-if="DashC.setList(game,lobby.allPlayers,username) && game.state==gameState.title">
                                     <div class="md-list-item-text">
                                         <h3>{{game.createdBy.name}}</h3>
                                         <h4>{{game.state}}</h4>
