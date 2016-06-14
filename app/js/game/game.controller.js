@@ -1,12 +1,13 @@
-module.exports = function (GameService, $stateParams, $filter, Socket) {
+module.exports = function (GameService, $stateParams, $filter, Socket, $rootScope) {
     var self = this;
     self.tiles = {};
     self.tempTile = undefined;
     self.players = {}; // ik heb dit toegevoegd voor lijst met spelers
     self.matchedTiles = {};
+    $rootScope.playing = true;
+
 
     var socket = Socket.connectGame($stateParams.id);
-
     socket.on('match', function (data) {
         _deleteTileFromBoard(data[0]);
         _deleteTileFromBoard(data[1]);

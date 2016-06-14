@@ -74,6 +74,5 @@ module.exports = function ($http, APIService) {
             });
     };
 
-
     return service;
 };
