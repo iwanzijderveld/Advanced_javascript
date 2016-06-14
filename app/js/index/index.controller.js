@@ -1,7 +1,7 @@
 module.exports = function ($scope, AuthenticationService, DashBoardService, $mdToast, $mdDialog) {
     this.self = this;
 
-    this.self.minPlayers = 2;
+    this.self.minPlayers = 1;
     this.self.maxPlayers = 32;
     this.self.players = [];
     this.self.gameTemplates = ["Snake", "Ox", "Dragon", "Shanghai", "Monkey", "Ram", "Rooster"];
