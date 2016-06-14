@@ -1,8 +1,9 @@
-module.exports = function ($scope, AuthenticationService, DashBoardService, $mdToast, $mdDialog) {
+module.exports = function ($scope, AuthenticationService, DashBoardService, $mdToast, $mdDialog, $location) {
     this.self = this;
 
     this.self.minPlayers = 2;
     this.self.maxPlayers = 32;
+    this.self.isDashboard = $location.path() === '/dashboard';
     this.self.players = [];
     this.self.gameTemplates = ["Snake", "Ox", "Dragon", "Shanghai", "Monkey", "Ram", "Rooster"];
     this.self.lobby = [
@@ -29,6 +30,7 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
         }
     ];
 
+
     for (i = this.self.minPlayers; i < this.self.maxPlayers + 1; i++) {
         this.self.players.push(i);
     }
@@ -40,6 +42,10 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
     this.self.logOut = function () {
         console.log("Uitloggen");
         AuthenticationService.logOut();
+    };
+
+    this.self.goToDashboard = function () {
+        AuthenticationService.goToDashboard();
     };
 
     this.self.showAddGame = function () {

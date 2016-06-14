@@ -17,6 +17,10 @@ module.exports = function ($rootScope, $window, $state) {
         _local.token = token;
 
         // go to dashboard
+         $state.go('app.dashboard');
+    };
+
+     service.goToDashboard = function () {
         $state.go('app.dashboard');
     };
 
