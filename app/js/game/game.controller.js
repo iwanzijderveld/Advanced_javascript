@@ -1,9 +1,18 @@
-module.exports = function (GameService, $stateParams, $filter) {
+module.exports = function (GameService, $stateParams, $filter, Socket, $rootScope) {
     var self = this;
     self.tiles = {};
     self.tempTile = undefined;
     self.players = {}; // ik heb dit toegevoegd voor lijst met spelers
     self.matchedTiles = {};
+    $rootScope.playing = true;
+
+
+    var socket = Socket.connectGame($stateParams.id);
+    socket.on('match', function (data) {
+        _deleteTileFromBoard(data[0]);
+        _deleteTileFromBoard(data[1]);
+        self.matchedTiles.push(data[0]);
+    });
 
     GameService.getTiles($stateParams.id, function (result) {
         if (result.statusText == 'OK') {
@@ -60,7 +69,8 @@ module.exports = function (GameService, $stateParams, $filter) {
         // get the tile with the same id from the tilelist
         var tileToDelet = $filter('tileById')(self.tiles, tile._id);
         // now get indexof tileToDelet and splice list;
-        self.tiles.splice(self.tiles.indexOf(tileToDelet), 1);
+        var index = self.tiles.indexOf(tileToDelet);
+        self.tiles.splice(index, 1);
         // ^^ HEEFT waarschijnlijk nog een check nodig of de tile niet al verwijderd is. null return
     };
 

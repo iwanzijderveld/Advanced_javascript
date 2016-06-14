@@ -1,11 +1,14 @@
-module.exports = function (DashBoardService, $mdToast, Socket, $state) {
+module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScope) {
     var self = this;
     self.games = {};
     self.game = {};
 
+
+    $rootScope.playing = false;
     self.setGame = function (game) {
         //Parse the whole JSON object
         self.game = game;
+        var socket = Socket.connectGame(game.id);
     };
 
     self.getGames = function () {
@@ -26,6 +29,7 @@ module.exports = function (DashBoardService, $mdToast, Socket, $state) {
             if (result.statusText == 'OK') {
                 console.log(result.data);
                 self.game = result.data;
+
             }
             else {
                 $mdToast.show($mdToast.simple().textContent(result.data.message));
@@ -73,7 +77,7 @@ module.exports = function (DashBoardService, $mdToast, Socket, $state) {
     };
 
     // Kan ook via filter
-    self.setList = function (game, allPlayers,username) {
+    self.setList = function (game, allPlayers, username) {
         var isUser;
         if (!allPlayers) {
             for (i = 0; i < game.players.length; i++) {

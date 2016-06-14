@@ -1,32 +1,24 @@
-module.exports = function ($mdToast) {
-    // var socket = io('http://mahjongmayhem.herokuapp.com?gameId=5755606a75c3971100c2c3c0');
+module.exports = function ($mdToast, $state) {
     var service = {};
-    var gameid;
 
     service.connectGame = function (id) {
-        socket = io('http://mahjongmayhem.herokuapp.com?gameId=' + id);
-        console.log(socket);
+        var socket = io('http://mahjongmayhem.herokuapp.com?gameId=' + id);
         console.log("Connected");
-        gameid = id;
-    };
-    // 
-    service.connectGame("575683276e6d1e1100ef41f1");
 
-    socket.on('start', function () {
-        console.log(gameid + ' Started');
-    });
+        socket.on('start', function () {
+            $mdToast.show($mdToast.simple().textContent("Game started"));
+            $state.go('app.game', { id: id });
+        });
 
-    socket.on('end', function () {
-        console.log(gameid + ' Ended');
-    });
+        socket.on('end', function () {
+            $mdToast.show($mdToast.simple().textContent("Game ended"));
+            // optie om naar dashboard te gaan?
+        });
 
-    socket.on('match', function () {
-        console.log(gameid + ' Matched Tiles');
-    });
-
-    socket.on('playerJoined', function () {
-        console.log(gameid + ' playerjoined');
-    });
-
+        socket.on('playerJoined', function (data) {
+            $mdToast.show($mdToast.simple().textContent(data._id + " joined"));
+        });
+        return socket
+    }
     return service;
 };
