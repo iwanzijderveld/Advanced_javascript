@@ -1,4 +1,13 @@
 module.exports = function ($scope, AuthenticationService, DashBoardService, $mdToast, $mdDialog, $location) {
+    
+  $scope.limitOptions = [5, 10, 15];
+  
+  $scope.query = {
+    // order: 'name',
+    limit: 5,
+    page: 1
+  };
+
     this.self = this;
 
     this.self.minPlayers = 2;
@@ -29,7 +38,6 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
             allPlayers: true
         }
     ];
-
 
     for (i = this.self.minPlayers; i < this.self.maxPlayers + 1; i++) {
         this.self.players.push(i);
