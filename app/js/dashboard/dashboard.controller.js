@@ -59,6 +59,20 @@ module.exports = function (DashBoardService, $mdToast, Socket, $state) {
         });
     };
 
+    self.playGame = function (gameId) {
+        DashBoardService.getGame(gameId, function (result) {
+            console.log(result);
+            if (result.statusText == 'OK') {
+                $mdToast.show($mdToast.simple().textContent("Playing game!"));
+                $state.go('app.game', { id: gameId });
+            }
+            else {
+                $mdToast.show($mdToast.simple().textContent(result.data.message));
+            }
+        })
+    };
+
+    // Kan ook via filter
     self.setList = function (game, allPlayers,username) {
         var isUser;
         if (!allPlayers) {

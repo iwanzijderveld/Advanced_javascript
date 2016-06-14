@@ -67,10 +67,11 @@
                                     {{DashC.game.id}}
                                 </md-card-title>
                                 <md-card-actions layout="row" layout-align="end center">
-                                    <md-button ng-click="DashC.startGame(DashC.game.id)" ng-if="DashC.game.id != undefined && DashC.game.state == 'open'" class="md-raised md-accent">Start</md-button>
+                                    <md-button ng-click="DashC.startGame(DashC.game.id)" ng-if="DashC.game.id != undefined && DashC.game.state == 'open'  && lobby.allPlayers==false" class="md-raised md-accent">Start</md-button>
+                                    <md-button ng-click="DashC.playGame(DashC.game.id)" ng-if="DashC.game.id != undefined && DashC.game.state == 'playing'  && lobby.allPlayers==false" class="md-raised md-accent">Play</md-button>
+                                    <md-button ng-click="DashC.spectateGame(DashC.game.id)" ng-if="DashC.game.id != undefined && DashC.game.state == 'playing'  && lobby.allPlayers==true" class="md-raised md-accent">Spectate</md-button>
                                 </md-card-actions>
                             </md-card>
-
                             <md-list>
                                 <md-list-item class="md-3-line" ng-repeat="player in DashC.game.players">
                                     <div class="md-list-item-text">
