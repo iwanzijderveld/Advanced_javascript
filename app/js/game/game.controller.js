@@ -6,6 +6,8 @@ module.exports = function (GameService, $stateParams, $filter, Socket, $rootScop
     self.matchedTiles = {};
     $rootScope.playing = true;
 
+
+    // SOCKET functie die hier moet blijven staan.
     var socket = Socket.connectGame($stateParams.id);
     socket.on('match', function (data) {
         _deleteTileFromBoard(data[0]);
@@ -23,6 +25,7 @@ module.exports = function (GameService, $stateParams, $filter, Socket, $rootScop
     self.clickHandler = function (tile) {
         if (_isPlayer()) {
             // second click so check if it is valid
+            TileService.checkMatch(tile, self.tiles);
             if (self.tempTile != undefined) {
                 GameService.matchTiles($stateParams.id, self.tempTile, tile, function (result) {
                     if (result.statusText == 'OK') {
@@ -30,7 +33,7 @@ module.exports = function (GameService, $stateParams, $filter, Socket, $rootScop
                         self.tempTile = undefined;
                     }
                     else {
-                        console.log(result.data.message);
+                        $mdToast.show($mdToast.simple().textContent(result.data.message));
                         self.tempTile = undefined;
                     }
                 });
@@ -40,7 +43,7 @@ module.exports = function (GameService, $stateParams, $filter, Socket, $rootScop
                 self.tempTile = tile;
             }
         }
-        else{
+        else {
             $mdToast.show($mdToast.simple().textContent("Spectaters cant play"));
         }
     };

@@ -5,10 +5,9 @@ require('angular-animate/angular-animate');
 require('angular-material/angular-material');
 require('angular-messages/angular-messages');
 require('angular-material-data-table/dist/md-data-table.min.js');
-require('angular-socket-io/socket.js');
 
 // Create your app
-var app = angular.module('webs6', ['ngMaterial', 'ui.router', 'ngMessages', 'ngAnimate', 'btford.socket-io']);
+var app = angular.module('webs6', ['ngMaterial', 'ui.router', 'ngMessages', 'ngAnimate', 'md.data.table']);
 // DIRECTIVES
 app.directive('tile', require('./directives/tile.directive.js'));
 app.directive('matchedtile', require('./directives/matchedTile.directive.js'));
