@@ -15,6 +15,7 @@ app.directive('matchedtile', require('./directives/matchedTile.directive.js'));
 // Filters
 app.filter('tileById', require('./util/tileById.filter.js'));
 app.filter('foundBy', require('./util/foundBy.filter.js'));
+app.filter('spectate', require('./util/spectate.filter.js'));
 // SERVICES
 app.service('APIService', require('./util/api.service.js'));
 app.service('AuthenticationService', require('./auth/auth.service.js'));
@@ -27,7 +28,7 @@ app.factory('HttpRequestInterceptor', require('./util/requestinterceptor.factory
 app.factory('Socket', require('./util/socket.factory.js'));
 
 // CONTROLLERS
-app.controller('IndexController', require('./index/index.controller.js'));
+app.controller('MenuController', require('./menu/menu.controller.js'));
 app.controller('AuthController', require('./auth/auth.controller.js'));
 app.controller('DashboardController', require('./dashboard/dashboard.controller.js'));
 app.controller('GameController', require('./game/game.controller.js'));
@@ -75,7 +76,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
         .state('app', {
             abstract: true,
             templateUrl: 'views/menu.html',
-            controller: 'IndexController as IndexC'
+            controller: 'MenuController as MenuC'
         })
         .state('app.dashboard', {
             url: '/dashboard',
@@ -95,16 +96,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
                 }
             }
         })
-        /*
-        .state('app.preference', {
-            url: '/preferences',
-            views: {
-                'menuContent': {
-                    templateUrl: 'views/preference/preferences.html',
-                    controller: 'PreferenceController as PrefC'
-                }
-            }
-        })*/
         ;
 
     $urlRouterProvider.otherwise('/dashboard');

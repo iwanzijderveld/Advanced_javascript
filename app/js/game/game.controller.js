@@ -1,11 +1,10 @@
-module.exports = function (GameService, $stateParams, $filter, Socket, $rootScope) {
+module.exports = function (GameService, $stateParams, $filter, Socket, $rootScope, $mdToast) {
     var self = this;
     self.tiles = {};
     self.tempTile = undefined;
     self.players = {}; // ik heb dit toegevoegd voor lijst met spelers
     self.matchedTiles = {};
     $rootScope.playing = true;
-
 
     var socket = Socket.connectGame($stateParams.id);
     socket.on('match', function (data) {
@@ -21,33 +20,41 @@ module.exports = function (GameService, $stateParams, $filter, Socket, $rootScop
             console.log(result.data.message);
         }
     });
-
     self.clickHandler = function (tile) {
-        if (self.tempTile != undefined) {
-            GameService.matchTiles($stateParams.id, self.tempTile, tile, function (result) {
-                if (result.statusText == 'OK') {
-                    console.log("MATCH");
-                    // Delete first before setting it to undefined again
-                    _deleteTileFromBoard(tile);
-                    _deleteTileFromBoard(self.tempTile);
-                    self.tempTile = undefined;
-                }
-                else {
-                    console.log(result.data.message);
-                    self.tempTile = undefined;
-                }
-            });
+        if (_isPlayer()) {
+            // second click so check if it is valid
+            if (self.tempTile != undefined) {
+                GameService.matchTiles($stateParams.id, self.tempTile, tile, function (result) {
+                    if (result.statusText == 'OK') {
+                        console.log("MATCH");
+                        self.tempTile = undefined;
+                    }
+                    else {
+                        console.log(result.data.message);
+                        self.tempTile = undefined;
+                    }
+                });
+            }
+            // first click
+            else {
+                self.tempTile = tile;
+            }
         }
-        else {
-            self.tempTile = tile;
+        else{
+            $mdToast.show($mdToast.simple().textContent("Spectaters cant play"));
         }
     };
+
+    function _isPlayer() {
+        return $filter('spectate')(self.players, $rootScope.username);
+    }
 
     //zoals ik bij service zei, miss via dashboard ophalen, is duplicated functie
     GameService.getGame($stateParams.id, function (result) {
         if (result.statusText == 'OK') {
             self.players = result.data;
             console.log(result.data);
+            console.log(_isPlayer());
         } else {
             console.log(result.data.message);
         }
