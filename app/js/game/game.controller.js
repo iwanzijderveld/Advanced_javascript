@@ -11,7 +11,7 @@ module.exports = function (GameService, $stateParams, $filter, Socket, $rootScop
     socket.on('match', function (data) {
         _deleteTileFromBoard(data[0]);
         _deleteTileFromBoard(data[1]);
-        self.matchedTiles.push(data[0]);
+        _getMatchedTiles();
     });
 
     GameService.getTiles($stateParams.id, function (result) {
@@ -52,26 +52,30 @@ module.exports = function (GameService, $stateParams, $filter, Socket, $rootScop
             console.log(result.data.message);
         }
     });
-    // get matched tiles 
-    GameService.getMatchedTiles($stateParams.id, function (result) {
-        if (result.statusText == 'OK') {
-            self.matchedTiles = result.data;
-            self.matchedTiles.forEach(function (tile) {
-                console.log(tile);
-                _deleteTileFromBoard(tile);
-            }, this);
-        } else {
-            console.log(result.data.message);
-        }
-    })
+
+    _getMatchedTiles();
+
+    function _getMatchedTiles() {
+        // get matched tiles 
+        GameService.getMatchedTiles($stateParams.id, function (result) {
+            if (result.statusText == 'OK') {
+                self.matchedTiles = result.data;
+            } else {
+                console.log(result.data.message);
+            }
+        })
+    };
 
     function _deleteTileFromBoard(tile) {
         // get the tile with the same id from the tilelist
         var tileToDelet = $filter('tileById')(self.tiles, tile._id);
-        // now get indexof tileToDelet and splice list;
-        var index = self.tiles.indexOf(tileToDelet);
-        self.tiles.splice(index, 1);
-        // ^^ HEEFT waarschijnlijk nog een check nodig of de tile niet al verwijderd is. null return
+
+        if (tileToDelet != null) {
+            // now get indexof tileToDelet and splice list;
+            var index = self.tiles.indexOf(tileToDelet);
+            self.tiles.splice(index, 1);
+            // ^^ HEEFT waarschijnlijk nog een check nodig of de tile niet al verwijderd is. null return
+        }
     };
 
     self.getValidTiles = function (username) {

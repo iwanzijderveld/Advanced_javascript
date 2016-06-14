@@ -19,7 +19,10 @@ module.exports = function () {
         return _api.base + _api.game.base + '/' + id;
     };
     service.tiles = function (id) {
-        return _gameBase(id) + _api.game.tiles.base;
+        return _gameBase(id) + _api.game.tiles.base + _api.game.tiles.sfalse;
+    };
+    service.matchedTiles = function (id) {
+        return _gameBase(id) + _api.game.tiles.base + _api.game.tiles.strue;
     };
 
     service.games = function () {
