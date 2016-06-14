@@ -1,27 +1,10 @@
-module.exports = function (GameService, $stateParams ) {
+module.exports = function (GameService, $stateParams, $filter) {
     var self = this;
     self.tiles = {};
-    self.deletedTiles = {};
     self.tempTile = undefined;
     self.players = {}; // ik heb dit toegevoegd voor lijst met spelers
+    self.matchedTiles = {};
 
-    //DIT IS EEN VOORBEELD VOOR HOE JE DE MATCHED TILES OPSLAAT     
-    self.matchedPlayerTiles = [
-        {
-            username: 'Joost Vermeulen',
-            tiles: [{ tileObject: 'Wind-West' },
-                { tileObject: 'Season-Summer' }]
-        },
-        {
-            username: 'Niels Snakenborg',
-            tiles: [{ tileObject: 'Wind-West' },
-                { tileObject: 'Bamboo-7' },
-                { tileObject: 'Season-Winter' },
-                { tileObject: 'Circle-3' }]
-         }
-    ];
-
-    self.gameDetails = "Iwan van Zijderveld";
     GameService.getTiles($stateParams.id, function (result) {
         if (result.statusText == 'OK') {
             self.tiles = result.data;
@@ -32,9 +15,12 @@ module.exports = function (GameService, $stateParams ) {
 
     self.clickHandler = function (tile) {
         if (self.tempTile != undefined) {
-            GameService.matchedTiles($stateParams.id, self.tempTile, tile, function (result) {
+            GameService.matchTiles($stateParams.id, self.tempTile, tile, function (result) {
                 if (result.statusText == 'OK') {
                     console.log("MATCH");
+                    // Delete first before setting it to undefined again
+                    _deleteTileFromBoard(tile);
+                    _deleteTileFromBoard(self.tempTile);
                     self.tempTile = undefined;
                 }
                 else {
@@ -52,22 +38,35 @@ module.exports = function (GameService, $stateParams ) {
     GameService.getGame($stateParams.id, function (result) {
         if (result.statusText == 'OK') {
             self.players = result.data;
+            console.log(result.data);
         } else {
             console.log(result.data.message);
         }
     });
-
-    //zoals ik bij service zei, miss via dashboard ophalen, is duplicated functie
-    GameService.getGame($stateParams.id, function (result) {
+    // get matched tiles 
+    GameService.getMatchedTiles($stateParams.id, function (result) {
         if (result.statusText == 'OK') {
-            self.players = result.data;
+            self.matchedTiles = result.data;
+            self.matchedTiles.forEach(function (tile) {
+                console.log(tile);
+                _deleteTileFromBoard(tile);
+            }, this);
         } else {
             console.log(result.data.message);
         }
-    });
-     self.getValidTiles = function (username) {
+    })
+
+    function _deleteTileFromBoard(tile) {
+        // get the tile with the same id from the tilelist
+        var tileToDelet = $filter('tileById')(self.tiles, tile._id);
+        // now get indexof tileToDelet and splice list;
+        self.tiles.splice(self.tiles.indexOf(tileToDelet), 1);
+        // ^^ HEEFT waarschijnlijk nog een check nodig of de tile niet al verwijderd is. null return
+    };
+
+    self.getValidTiles = function (username) {
         for (i = 0; i < self.matchedPlayerTiles.length; i++) {
-            if ( self.matchedPlayerTiles[i].username == username) {
+            if (self.matchedPlayerTiles[i].username == username) {
                 return self.matchedPlayerTiles[i].tiles;
             }
         }

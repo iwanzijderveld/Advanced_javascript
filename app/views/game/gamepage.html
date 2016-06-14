@@ -3,7 +3,7 @@
     </tile>
 </div>-->
 
- <md-tabs md-theme="dashboard" class="md-accent md-hue-2" md-dynamic-height md-stretch-tabs>
+<md-tabs md-theme="dashboard" class="md-accent md-hue-2" md-dynamic-height md-stretch-tabs>
     <md-tab label="GameBoard">
         <md-content>
             <div layout="row" layout-align="center" style="height: 800px">
@@ -13,20 +13,25 @@
         </md-content>
     </md-tab>
     <md-tab label="Played Tiles">
-         <md-tabs class="md-accent md-hue-1" md-dynamic-height>
-            <md-tab ng-repeat="players in GameC.players" label="{{players.name}}">
+        <md-tabs class="md-accent md-hue-1" md-dynamic-height>
+            <md-tab ng-repeat="player in GameC.players" label="{{player.name}}">
                 <md-tab-body>
-                     <md-content>
+                    <md-content>
                         <div layout="column" flex>
-                            <md-list>                                
-                                <!--loopen door array van gezette tegels getest met deze ID 575eafe8b62cb21100dc7404-->
-                                <md-list-item class="md-3-line" ng-repeat="tilesArray in GameC.getValidTiles(players.name)">
+                            <md-list>
+                                <md-list-item class="md-3-line" ng-repeat="tile in GameC.matchedTiles | foundBy:player._id">
+                                    <!--loopen door array van gezette tegels getest met deze ID 575eafe8b62cb21100dc7404-->
+                                    <!--<md-list-item class="md-3-line" ng-repeat="tilesArray in GameC.getValidTiles(players.name)">
                                     <!--class mee geven van tiles - sla tiles op array met json object-->
-                                    <tile class="ng-scope {{tilesArray.tileObject}}" style="left: 0;"></tile>
-                                    <tile class="ng-scope {{tilesArray.tileObject}}" style="left: 30px;float:left;"></tile>
+                                    <matchedTile style="left: 0;"></matchedTile>
+                                    <matchedTile style="left: 80px;float:left;"></matchedTile>
                                     <div class="md-list-item-text" flex="30">
-                                        <h2>matched tiles: {{tilesArray.tileObject}}</h2>
+                                        <h2>matched tiles: {{tile.tile.suit}} - {{tile.tile.name}}</h2>
                                         <p>Zet nummer: {{$index + 1}}</p>
+                                    </div>
+                                    <div class="md-list-item-text" flex="30">
+                                        <h2>Datum</h2>
+                                        <p>{{tile.match.foundOn | date:'dd/MM/yyyy HH:mm:ss'}}</p>
                                     </div>
                                     <md-divider ng-if="!$last"></md-divider>
                                 </md-list-item>
@@ -38,5 +43,3 @@
         </md-tabs>
     </md-tab>
 </md-tabs>
-
-

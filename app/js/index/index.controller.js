@@ -55,7 +55,7 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
             templateUrl: 'views/preference/preferences.html',
             controller: 'PreferenceController as PrefC',
             parent: angular.element(document.body),
-            clickOutsideToClose: false
+            clickOutsideToClose: true
         });
     }
     this.self.closeAddGame = function () {

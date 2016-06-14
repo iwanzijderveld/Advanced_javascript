@@ -18,7 +18,10 @@ $tile_width: 73;
     width: $tile_width + px;
 }
 .tile:hover{
-	border: red solid 1px;
+	border:  3px solid rgba(255, 0, 0, .8);
+}
+.selected{
+	border: 3px solid black;
 }
 
 @each $suit in $tilesuits{

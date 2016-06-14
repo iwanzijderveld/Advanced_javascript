@@ -19,7 +19,9 @@ $start_top_margin: 11;
     height: $tile_height + px;
     width: $tile_width + px;
 }
-
+.tile:hover{
+	border: red ridge 2px;
+}
 @each $suit in $tilesuits{
 	@if $suit == Bamboo{
 		@for $i from 1 through $bamboos{
