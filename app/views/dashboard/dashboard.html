@@ -45,7 +45,7 @@
     </md-tab>
   </md-tabs>-->
   
-<md-button class="btn btn-success btn-lg" ng-click="setGameStateFilter('open')">Open games</md-button>
+<md-button class="btn btn-success btn-lg" ng-click="setGameStateFilter('')">All games</md-button>
 <md-button class="btn btn-warning btn-lg" ng-click="setGameStateFilter('playing')">Spectate</md-button>
 <md-button class="btn btn-danger btn-lg" ng-click="setGameStateFilter('finished')">Finished</md-button>
 <md-button class="btn btn-info btn-lg" ng-click="setGameStateFilter(username)">My games</md-button>
@@ -59,18 +59,16 @@
                                         <th md-column></th>
                                         <th md-column md:order:by="state"><span>Status</span></th>
                                         <th md-column data-md-numeric data-md-order-by="gameTemplate.id"><span>Template</span></th>
-                                        <th md-column data-md-numeric data-md-order-by="createdOn" data-md-desc><span>Datum</span></th>
-                                        <th md-column data-md-numeric data-md-order-by="action"><span>Actie</span></th>
+                                        <th md-column data-md-numeric data-md-order-by="createdOn"><span>Datum</span></th>
                                     </tr>
                                 </thead>
                                 <tbody md-body>
                                     <tr ng-click="DashC.setGame(game)" md-row md-select="game" md-select-id="createdOn" data-md-on-select="log" md-on-deselect="deselect" x-md-auto-select="options.autoSelect"  data-ng-repeat="game in DashC.games | filter:gameStateFilter | orderBy: query.order | limitTo: query.limit : (query.page - 1) * query.limit">
-                                        <td md-cell>{{game.createdBy._id}}</td>
+                                        <td md-cell>{{game.createdBy._id}}<br /> {{game.createdBy.name}}</td>
                                         <td md-cell>{{game.createdBy.name}}</td>
                                         <td md-cell>{{game.state}}</td>
                                         <td md-cell>{{game.gameTemplate.id}}</td>
                                         <td md-cell>{{game.createdOn | date:'yyyy-MM-dd HH:mm'}}</td>
-                                        <td md-cell><md-button ng-click="DashC.joinGame(game.id)" ng-if="game.state=='open' && lobby.allPlayers==false" class="md-raised md-accent">Join</md-button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -81,9 +79,10 @@
                             <md-card>
                                 <md-card-title>{{DashC.game.id}}</md-card-title>
                                 <md-card-actions layout="row" layout-align="end center">
-                                    <md-button ng-click="DashC.startGame(DashC.game.id)" ng-if="DashC.game.id != undefined && DashC.game.state == 'open'  && lobby.allPlayers==false" class="md-raised md-accent">Start</md-button>
-                                    <md-button ng-click="DashC.playGame(DashC.game.id)" ng-if="DashC.game.id != undefined && DashC.game.state == 'playing'  && lobby.allPlayers==false" class="md-raised md-accent">Play</md-button>
-                                    <md-button ng-click="DashC.spectateGame(DashC.game.id)" ng-if="DashC.game.id != undefined && DashC.game.state == 'playing'  && lobby.allPlayers==true" class="md-raised md-accent">Spectate</md-button>
+                                    <md-button ng-click="DashC.joinGame(DashC.game.id)" ng-disabled="DashC.game.createdBy._id==username" ng-if="DashC.game.id != undefined && DashC.game.state == 'open'" class="md-raised md-accent">Join</md-button>
+                                    <md-button ng-click="DashC.startGame(DashC.game.id)" ng-disabled="DashC.game.createdBy._id!=username" ng-if="DashC.game.id != undefined && DashC.game.state == 'open'" class="md-raised md-accent">Start</md-button>
+                                    <md-button ng-click="DashC.playGame(DashC.game.id)" ng-disabled="!DashC.playerExists(DashC.game,username)" ng-if="DashC.game.id != undefined && DashC.game.state == 'playing'" class="md-raised md-accent">Play</md-button>
+                                    <md-button ng-click="DashC.spectateGame(DashC.game.id)" ng-disabled="DashC.playerExists(DashC.game,username)" ng-if="DashC.game.id != undefined && DashC.game.state == 'playing' || DashC.game.state == 'finished'" class="md-raised md-accent">Spectate</md-button>
                                 </md-card-actions>
                             </md-card>
                             <md-list>
@@ -95,5 +94,4 @@
                                 </md-list-item>
                             </md-list>
                         </div>
-                    </md-content>
-</md-content>
+                </md-content>

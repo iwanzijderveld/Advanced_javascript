@@ -5,29 +5,29 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
     this.self.maxPlayers = 32;
     this.self.players = [];
     this.self.gameTemplates = ["Snake", "Ox", "Dragon", "Shanghai", "Monkey", "Ram", "Rooster"];
-    this.self.lobby = [
-        {
-            title: 'Games',
-            games: [{ title: 'open' }],
-            allPlayers: true
-        },
-        {
-            title: 'My games',
-            games: [{ title: 'open' },
-                { title: 'playing' }],
-            allPlayers: false
-        },
-        {
-            title: 'Spectate',
-            games: [{ title: 'playing' }],
-            allPlayers: true
-        },
-        {
-            title: 'History',
-            games: [{ title: 'finished' }],
-            allPlayers: true
-        }
-    ];
+    // this.self.lobby = [
+    //     {
+    //         title: 'Games',
+    //         games: [{ title: 'open' }],
+    //         allPlayers: true
+    //     },
+    //     {
+    //         title: 'My games',
+    //         games: [{ title: 'open' },
+    //             { title: 'playing' }],
+    //         allPlayers: false
+    //     },
+    //     {
+    //         title: 'Spectate',
+    //         games: [{ title: 'playing' }],
+    //         allPlayers: true
+    //     },
+    //     {
+    //         title: 'History',
+    //         games: [{ title: 'finished' }],
+    //         allPlayers: true
+    //     }
+    // ];
 
     
     //Start dataTable
@@ -126,5 +126,4 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
             }
         });
     };
->>>>>>> origin/master:app/js/menu/menu.controller.js
 };

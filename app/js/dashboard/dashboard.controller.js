@@ -76,7 +76,7 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
         })
     };
 
-    // Kan ook via filter
+    // Kan ook via filter -- Kan weg als we geen tabs meer gebruiken
     self.setList = function (game, allPlayers, username) {
         var isUser;
         if (!allPlayers) {
@@ -89,6 +89,14 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
             isUser = true;
         }
         return isUser;
+    };
+
+    self.playerExists = function (game, username) {
+        for (i = 0; i < game.players.length; i++) {
+            if (game.players[i]._id == username) {
+                return true
+            }
+        }
     };
 
     // Load data automatically when the user opens page
