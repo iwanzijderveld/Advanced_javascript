@@ -56,7 +56,7 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
 ];
 
   $scope.query = {
-    order: 'createdOn',
+    order: '-createdOn',
     limit: 10,
     page: 1
   };
@@ -71,6 +71,11 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
     $scope.promise = $timeout(function () {
     }, 2000);
   };
+
+    $scope.logOrder = function (order) {
+    console.log('order: ', order);
+  };
+  
 
   $scope.log = function (item) {
     console.log(item.name, 'was selected');
