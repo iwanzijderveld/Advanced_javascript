@@ -1,10 +1,57 @@
-module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScope) {
+module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScope,$scope) {
     var self = this;
     self.games = {};
     self.game = {};
 
+    $scope.setGameStateFilter = function(gameState){
+        $scope.gameStateFilter = gameState;
+    }
 
-    $rootScope.playing = false;
+    $scope.options = {
+        rowSelection: false,
+        multiSelect: false,
+        autoSelect: false,
+        decapitate: false,
+        largeEditDialog: false,
+        boundaryLinks: false,
+        limitSelect: true,
+        pageSelect: false
+    };
+
+    $scope.selected = [];
+    $scope.limitOptions = [5, 10, 15,{
+        label: 'All',
+        value: function () {
+          return self.games ? self.games.length : 0;
+        }
+    }];
+
+    $scope.query = {
+        order: '-createdOn',
+        limit: 10,
+        page: 1
+    };
+    
+    $scope.toggleLimitOptions = function () {
+        $scope.limitOptions = $scope.limitOptions ? undefined : [5, 10, 15];
+    };
+    
+    $scope.onPaginate = function(page, limit) {
+        console.log('Scope Page: ' + $scope.query.page + ' Scope Limit: ' + $scope.query.limit);
+        console.log('Page: ' + page + ' Limit: ' + limit);
+        $scope.promise = $timeout(function () {
+        }, 2000);
+    };
+
+    $scope.logOrder = function (order) {
+        console.log('order: ', order);
+    };
+    
+    $scope.log = function (item) {
+        console.log(item.name, 'was selected');
+    };
+
+    $scope.playing = false;
     self.setGame = function (game) {
         //Parse the whole JSON object
         self.game = game;
@@ -87,21 +134,6 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
                 $mdToast.show($mdToast.simple().textContent(result.data.message));
             }
         })
-    };
-
-    // Kan ook via filter -- Kan weg als we geen tabs meer gebruiken
-    self.setList = function (game, allPlayers, username) {
-        var isUser;
-        if (!allPlayers) {
-            for (i = 0; i < game.players.length; i++) {
-                if (game.players[i]._id == username) {
-                    isUser = true;
-                }
-            }
-        } else {
-            isUser = true;
-        }
-        return isUser;
     };
 
     self.playerExists = function (game, username) {
