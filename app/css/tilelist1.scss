@@ -4,8 +4,8 @@ $custom_down: 0;
 $circles: 9;
 $bamboos: 9;
 $characters: 9;
-$winds: North East South West;
-$dragons: Green Red White;
+$winds: East West South North;
+$dragons: Red Green White;
 $flowers: Plum Chrysantememum Orchid Bamboo;
 $seasons: Spring Summer Autumn Winter;
 $tilesuits: Bamboo Circle Character Dragon Wind Season Flower;
@@ -53,6 +53,28 @@ $start_top_margin: 11;
                 $custom_right: ($i - 1)* $tile_width + $start_left_margin;
 				background: #{'url('+$file_path+') -'+$custom_right+'px -'+$custom_down+'px'};
 			}
+		}
+	}
+	@if $suit == Dragon{
+		$custom_right: ($tile_width * $characters) + $start_left_margin; 
+		@each $dragon in $dragons{
+			.#{$suit+"-"+$dragon}{
+				@extend .tile;
+				$custom_down: ($tile_height * 9) + $start_top_margin;
+				background: #{'url('+$file_path+') -'+$custom_right+'px -'+$custom_down+'px'};
+			}
+			$custom_right: $custom_right + $tile_width;
+		}
+	}
+	@if $suit == Wind{
+		$custom_right: ($tile_width * $circles) + $start_left_margin;
+		@each $wind in $winds{
+			.#{$suit+"-"+$wind}{
+				@extend .tile;
+					$custom_down: $start_top_margin;
+					background: #{'url('+$file_path+') -'+$custom_right+'px -'+$custom_down+'px'};
+			}
+			$custom_right: ($custom_right+$tile_width);
 		}
 	}
     @if $suit == Season{
