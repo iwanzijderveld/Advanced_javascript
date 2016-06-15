@@ -76,6 +76,19 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
         })
     };
 
+    self.spectateGame = function (gameId) {
+        DashBoardService.getGame(gameId, function (result) {
+            console.log(result);
+            if (result.statusText == 'OK') {
+                $mdToast.show($mdToast.simple().textContent("Spectating game!"));
+                $state.go('app.game', { id: gameId });
+            }
+            else {
+                $mdToast.show($mdToast.simple().textContent(result.data.message));
+            }
+        })
+    };
+
     // Kan ook via filter -- Kan weg als we geen tabs meer gebruiken
     self.setList = function (game, allPlayers, username) {
         var isUser;
