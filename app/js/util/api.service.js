@@ -12,8 +12,10 @@ module.exports = function () {
                 matches: '/matches',
                 strue: '?matched=true',
                 sfalse: '?matched=false'
-            }
-        }
+            },
+        },
+        templates: 'gametemplates',
+        gameStates: 'gamestates'
     };
     function _gameBase(id) {
         return _api.base + _api.game.base + '/' + id;
@@ -42,6 +44,11 @@ module.exports = function () {
     service.tileMatch = function (id) {
         return _gameBase(id) + _api.game.tiles.base + _api.game.tiles.matches;
     };
-
+    service.gameTemplates = function () {
+        return _api.base + _api.templates;
+    }
+    service.gameStates = function () {
+        return _api.base + _api.gameStates;
+    }
     return service;
 };
