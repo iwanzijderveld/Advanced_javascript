@@ -48,27 +48,38 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
         .primaryPalette('green', {
             'default': '400',
         })
+        .accentPalette('lime', {
+            'default': 'A400'
+        })
         .backgroundPalette('grey', {
-            'default': '200'
+            'default': '50'
         });
     $mdThemingProvider.theme('blue')
-        .primaryPalette('blue');
-
-    $mdThemingProvider.theme('dashboard')
-        .primaryPalette('green')
-        .accentPalette('pink')
+        .primaryPalette('blue')      
+        .accentPalette('deep-orange')
         .backgroundPalette('grey',
         {
             'default': '50'
         });
 
-    $mdThemingProvider.theme('gameBoard')
-        .primaryPalette('green')
-        .accentPalette('brown')
-        .backgroundPalette('deep-orange',
+    $mdThemingProvider.theme('red')
+        .primaryPalette('red')      
+        .accentPalette('blue-grey')
+        .backgroundPalette('grey',
         {
-            'default': '300'
+            'default': '50'
         });
+
+    $mdThemingProvider.theme('dark')
+        .primaryPalette('grey',{
+            'default': '900'
+        })      
+        .accentPalette('light-blue')
+        .backgroundPalette('grey',
+        {
+            'default': '50'
+        });
+
 
     //$mdThemingProvider.setDefaultTheme('default');
     $mdThemingProvider.alwaysWatchTheme(true);

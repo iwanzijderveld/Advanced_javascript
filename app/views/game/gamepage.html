@@ -3,7 +3,7 @@
     </tile>
 </div>-->
 
-<md-tabs md-theme="gameBoard" class="md-primary" md-dynamic-height md-stretch-tabs>
+<md-tabs class="md-primary" md-dynamic-height md-stretch-tabs>
     <md-tab label="GameBoard">
         <md-content class="md-primary">
             <div layout="row" layout-align="center" style="height: 800px">
@@ -13,10 +13,10 @@
         </md-content>
     </md-tab>
     <md-tab label="Played Tiles">
-        <md-tabs class="md-accent md-hue1" md-dynamic-height>
+        <md-tabs class="md-accent" md-dynamic-height>
             <md-tab ng-repeat="player in GameC.players" label="{{player.name}}">
                 <md-tab-body>
-                    <md-content class="md-primary md-hue-1">
+                    <md-content class="md-primary">
                         <div layout="column" flex>
                             <md-list>
                                 <md-list-item class="md-3-line" ng-repeat="tile in GameC.matchedTiles | foundBy:player._id">
