@@ -3,9 +3,9 @@
     </tile>
 </div>-->
 
-<md-tabs md-theme="dashboard" class="md-accent md-hue-2" md-dynamic-height md-stretch-tabs>
+<md-tabs md-theme="gameBoard" class="md-accent md-hue-2" md-dynamic-height md-stretch-tabs>
     <md-tab label="GameBoard">
-        <md-content>
+        <md-content class="md-primary">
             <div layout="row" layout-align="center" style="height: 800px">
                 <tile ng-repeat="tile in GameC.tiles" ng-click="GameC.clickHandler(tile)">
                 </tile>

@@ -62,6 +62,14 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
             'default': '50'
         });
 
+    $mdThemingProvider.theme('gameBoard')
+        .primaryPalette('orange')
+        .accentPalette('red')
+        .backgroundPalette('deep-orange',
+        {
+            'default': 'A200'
+        });
+
     //$mdThemingProvider.setDefaultTheme('default');
     $mdThemingProvider.alwaysWatchTheme(true);
 

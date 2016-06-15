@@ -13,6 +13,15 @@ $tile_height: 90;
 $tile_width: 73;
 
 .tile{
+	-webkit-transform: scale(1.1)  skew(-20deg, 10deg);
+	-moz-transform:  scale(1.1) skew(-20deg, 10deg);
+	-o-transform:  scale(1.1) skew(-20deg, 10deg);
+	-ms-transform:  scale(1.1) skew(-20deg, 10deg);
+	transform:  scale(1.1) skew(-20deg, 10deg);
+	box-shadow: 10px 10px 5px #2a2a2a;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
     position: absolute;
     height: $tile_height + px;
     width: $tile_width + px;
