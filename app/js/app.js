@@ -6,9 +6,8 @@ require('angular-material/angular-material');
 require('angular-messages/angular-messages');
 require('angular-material-data-table/dist/md-data-table.min.js');
 
-
+// Create your app
 var app = angular.module('webs6', ['ngMaterial', 'ui.router', 'ngMessages', 'ngAnimate', 'md.data.table']);
-
 // DIRECTIVES
 app.directive('tile', require('./directives/tile.directive.js'));
 app.directive('matchedtile', require('./directives/matchedTile.directive.js'));
