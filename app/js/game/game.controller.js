@@ -68,7 +68,6 @@ module.exports = function (GameService, $stateParams, $filter, Socket, $rootScop
     };
 
     function _init() {
-        //zoals ik bij service zei, miss via dashboard ophalen, is duplicated functie
         GameService.getGame($stateParams.id, function (result) {
             if (result.statusText == 'OK') {
                 self.players = result.data;

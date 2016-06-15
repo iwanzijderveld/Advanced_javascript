@@ -1,8 +1,3 @@
-<!--<div layout="row" layout-align="center" style="height: 800px">
-    <tile ng-repeat="tile in GameC.tiles" ng-click="GameC.clickHandler(tile)">
-    </tile>
-</div>-->
-
 <md-tabs class="md-primary" md-dynamic-height md-stretch-tabs>
     <md-tab label="GameBoard">
         <md-content class="md-primary">
@@ -20,9 +15,6 @@
                         <div layout="column" flex>
                             <md-list>
                                 <md-list-item class="md-3-line" ng-repeat="tile in GameC.matchedTiles | foundBy:player._id">
-                                    <!--loopen door array van gezette tegels getest met deze ID 575eafe8b62cb21100dc7404-->
-                                    <!--<md-list-item class="md-3-line" ng-repeat="tilesArray in GameC.getValidTiles(players.name)">
-                                    <!--class mee geven van tiles - sla tiles op array met json object-->
                                     <div flex="30">
                                     <matchedTile style="left: 0;"></matchedTile>
                                     <matchedTile style="left: 80px;float:left;"></matchedTile>
