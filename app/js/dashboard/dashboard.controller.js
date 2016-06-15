@@ -21,7 +21,7 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
     };
 
     self.selected = [];
-    self.limitOptions = [5, 10, 15, {
+    self.limitOptions = [10, 20, 50, 100, {
         label: 'All',
         value: function () {
             return self.total;
