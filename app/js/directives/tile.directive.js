@@ -3,8 +3,8 @@ module.exports = function () {
         restrict: 'E',
         link: function (scope, element) {
             var tile = scope.tile;
-            var leftPos = 37;
-            var topPos = 45.5;
+            var leftPos = 36.5;
+            var topPos = 45;
             var zPos = 3;
 
             element.css({ 'left': (tile.xPos) * leftPos + 'px', 'top': tile.yPos * topPos + 'px', 'z-index': tile.zPos });

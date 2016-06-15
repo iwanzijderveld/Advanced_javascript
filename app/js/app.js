@@ -5,7 +5,6 @@ require('angular-animate/angular-animate');
 require('angular-material/angular-material');
 require('angular-messages/angular-messages');
 require('angular-material-data-table/dist/md-data-table.min.js');
-
 // Create your app
 var app = angular.module('webs6', ['ngMaterial', 'ui.router', 'ngMessages', 'ngAnimate', 'md.data.table']);
 // DIRECTIVES
@@ -21,6 +20,7 @@ app.service('AuthenticationService', require('./auth/auth.service.js'));
 app.service('DashBoardService', require('./dashboard/dashboard.service.js'));
 app.service('GameService', require('./game/game.service.js'));
 app.service('PreferenceService', require('./preference/preference.service.js'));
+app.service('TileService', require('./game/tile.service.js'));
 
 // Factories
 app.factory('HttpRequestInterceptor', require('./util/requestinterceptor.factory.js'));

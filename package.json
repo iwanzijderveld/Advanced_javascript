@@ -35,6 +35,8 @@
     "karma-mocha": "^1.0.1",
     "karma-sinon": "^1.0.5",
     "mocha": "^2.5.3",
+    "mock-local-storage": "^1.0.2",
+    "ngstorage": "^0.3.10",
     "sinon": "^1.17.4",
     "watchify": "^3.7.0"
   },

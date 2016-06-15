@@ -1,12 +1,10 @@
-module.exports = function (GameService, $stateParams, $filter, Socket, $rootScope, $mdToast) {
+module.exports = function (GameService, $stateParams, $filter, Socket, $rootScope, $mdToast, TileService) {
     var self = this;
     self.tiles = {};
     self.tempTile = undefined;
     self.players = {}; // ik heb dit toegevoegd voor lijst met spelers
     self.matchedTiles = {};
     $rootScope.playing = true;
-
-
     // SOCKET functie die hier moet blijven staan.
     var socket = Socket.connectGame($stateParams.id);
     socket.on('match', function (data) {
@@ -15,18 +13,14 @@ module.exports = function (GameService, $stateParams, $filter, Socket, $rootScop
         _getMatchedTiles();
     });
 
-    GameService.getTiles($stateParams.id, function (result) {
-        if (result.statusText == 'OK') {
-            self.tiles = result.data;
-        } else {
-            console.log(result.data.message);
-        }
-    });
+
+    _init(); // initialize controller
+
     self.clickHandler = function (tile) {
-        if (_isPlayer()) {
+        if (_isPlayer()) { // are we a player of this game?
             // second click so check if it is valid
-            TileService.checkMatch(tile, self.tiles);
             if (self.tempTile != undefined) {
+                TileService.easyVerification(tile, self.tiles);
                 GameService.matchTiles($stateParams.id, self.tempTile, tile, function (result) {
                     if (result.statusText == 'OK') {
                         console.log("MATCH");
@@ -44,26 +38,13 @@ module.exports = function (GameService, $stateParams, $filter, Socket, $rootScop
             }
         }
         else {
-            $mdToast.show($mdToast.simple().textContent("Spectaters cant play"));
+            $mdToast.show($mdToast.simple().textContent("Spectators cant play"));
         }
     };
 
     function _isPlayer() {
         return $filter('spectate')(self.players, $rootScope.username);
     }
-
-    //zoals ik bij service zei, miss via dashboard ophalen, is duplicated functie
-    GameService.getGame($stateParams.id, function (result) {
-        if (result.statusText == 'OK') {
-            self.players = result.data;
-            console.log(result.data);
-            console.log(_isPlayer());
-        } else {
-            console.log(result.data.message);
-        }
-    });
-
-    _getMatchedTiles();
 
     function _getMatchedTiles() {
         // get matched tiles 
@@ -81,19 +62,30 @@ module.exports = function (GameService, $stateParams, $filter, Socket, $rootScop
         var tileToDelet = $filter('tileById')(self.tiles, tile._id);
 
         if (tileToDelet != null) {
-            // now get indexof tileToDelet and splice list;
             var index = self.tiles.indexOf(tileToDelet);
             self.tiles.splice(index, 1);
-            // ^^ HEEFT waarschijnlijk nog een check nodig of de tile niet al verwijderd is. null return
         }
     };
 
-    self.getValidTiles = function (username) {
-        for (i = 0; i < self.matchedPlayerTiles.length; i++) {
-            if (self.matchedPlayerTiles[i].username == username) {
-                return self.matchedPlayerTiles[i].tiles;
+    function _init() {
+        //zoals ik bij service zei, miss via dashboard ophalen, is duplicated functie
+        GameService.getGame($stateParams.id, function (result) {
+            if (result.statusText == 'OK') {
+                self.players = result.data;
+                console.log(result.data);
+                console.log(_isPlayer());
+            } else {
+                console.log(result.data.message);
             }
-        }
-    };
+        });
+        GameService.getTiles($stateParams.id, function (result) {
+            if (result.statusText == 'OK') {
+                self.tiles = result.data;
+            } else {
+                console.log(result.data.message);
+            }
+        });
 
+        _getMatchedTiles();
+    }
 };

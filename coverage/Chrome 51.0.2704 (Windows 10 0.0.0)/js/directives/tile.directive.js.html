@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">9.09% </span>
+        <span class="strong">90.91% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/11</span>
+        <span class='fraction'>10/11</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">9.09% </span>
+        <span class="strong">90.91% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>1/11</span>
+        <span class='fraction'>10/11</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -61,37 +61,37 @@
 16
 17
 18</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">module.exports = <span class="fstat-no" title="function not covered" >function () {</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">module.exports = function () {
+    return {
         restrict: 'E',
-        link: <span class="fstat-no" title="function not covered" >function (scope, element) {</span>
-<span class="cstat-no" title="statement not covered" >            var tile = scope.tile;</span>
-<span class="cstat-no" title="statement not covered" >            var leftPos = 37;</span>
-<span class="cstat-no" title="statement not covered" >            var topPos = 45.5;</span>
-<span class="cstat-no" title="statement not covered" >            var zPos = 3;</span>
+        link: function (scope, element) {
+            var tile = scope.tile;
+            var leftPos = 36.5;
+            var topPos = 45;
+            var zPos = 3;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >            element.css({ 'left': (tile.xPos) * leftPos + 'px', 'top': tile.yPos * topPos + 'px', 'z-index': tile.zPos });</span>
-<span class="cstat-no" title="statement not covered" >            if (scope.tile.zPos &gt; 0) {</span>
+            element.css({ 'left': (tile.xPos) * leftPos + 'px', 'top': tile.yPos * topPos + 'px', 'z-index': tile.zPos });
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (scope.tile.zPos &gt; 0) {
 <span class="cstat-no" title="statement not covered" >                element.css({ 'left': ((tile.xPos) * leftPos + (tile.zPos * zPos)) + 'px', 'top': (tile.yPos * topPos - (tile.zPos * zPos)) + 'px' })</span>
             }
-<span class="cstat-no" title="statement not covered" >            var className = tile.tile.suit + "-" + tile.tile.name;</span>
-<span class="cstat-no" title="statement not covered" >            element.addClass(className)</span>
+            var className = tile.tile.suit + "-" + tile.tile.name;
+            element.addClass(className)
         }
     };
 };</pre></td></tr>
@@ -100,7 +100,7 @@
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jun 15 2016 12:09:13 GMT+0200 (West-Europa (zomertijd))
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jun 15 2016 16:06:53 GMT+0200 (West-Europa (zomertijd))
 </div>
 </div>
 <script src="../../prettify.js"></script>

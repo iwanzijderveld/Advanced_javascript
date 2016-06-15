@@ -8,7 +8,6 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
     self.setGame = function (game) {
         //Parse the whole JSON object
         self.game = game;
-        var socket = Socket.connectGame(game.id);
     };
 
     self.getGames = function () {
@@ -56,6 +55,7 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
                 $mdToast.show($mdToast.simple().textContent('Joined game!'));
                 self.getGame(id);
                 self.getGames();
+                var socket = Socket.connectGame(id);
             }
             else {
                 $mdToast.show($mdToast.simple().textContent(result.data.message));
