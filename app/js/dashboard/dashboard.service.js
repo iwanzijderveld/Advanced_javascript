@@ -29,7 +29,7 @@ module.exports = function ($http, APIService) {
      * state: game state filter
      */
     service.getGames = function (pageSize, pageIndex, callback) {
-        $http.get(APIService.games(), {pageSize: pageSize, pageIndex: pageIndex})
+        $http.get(APIService.games() + '?pageSize=' + pageSize + '&pageIndex=' + pageIndex)
             .then(function (response) {
                 callback(response);
             }, function (error) {

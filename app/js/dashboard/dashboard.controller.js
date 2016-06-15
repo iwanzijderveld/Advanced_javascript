@@ -2,6 +2,7 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
     var self = this;
     self.games = {};
     self.game = {};
+    self.total;
     $rootScope.playing = false;
 
     self.setGameStateFilter = function (gameState) {
@@ -23,7 +24,7 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
     self.limitOptions = [5, 10, 15, {
         label: 'All',
         value: function () {
-            return self.games ? self.games.length : 0;
+            return self.total;
         }
     }];
 
@@ -43,6 +44,7 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
         /* self.promise = $timeout(function () {
          }, 2000);
          */
+        self.query.page++;
         self.promise = self.getGames();
     };
 
@@ -58,6 +60,12 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
         //Parse the whole JSON object
         self.game = game;
     };
+    DashBoardService.gameStates(function (result) {
+        if (result.statusText == 'OK') {
+            self.total = result.data[0].count + result.data[1].count + result.data[2].count;
+            console.log(self.total);
+        }
+    });
 
     self.getGames = function () {
         DashBoardService.getGames(self.query.limit, self.query.page, function (result) {

@@ -14,8 +14,8 @@ module.exports = function () {
                 sfalse: '?matched=false'
             },
         },
-        templates: 'gametemplates',
-        gameStates: 'gamestates'
+        templates: '/gametemplates',
+        gameStates: '/gamestates'
     };
     function _gameBase(id) {
         return _api.base + _api.game.base + '/' + id;
