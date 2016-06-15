@@ -45,10 +45,10 @@
     </md-tab>
   </md-tabs>-->
   
-<md-button class="btn btn-success btn-lg" ng-click="DashC.setGameStateFilter('');DashC.setGame(null)">All games</md-button>
-<md-button class="btn btn-warning btn-lg" ng-click="DashC.setGameStateFilter('playing');DashC.setGame(null)">Spectate</md-button>
-<md-button class="btn btn-danger btn-lg" ng-click="DashC.setGameStateFilter('finished');DashC.setGame(null)">Finished</md-button>
-<md-button class="btn btn-info btn-lg" ng-click="DashC.setGameStateFilter(username);DashC.setGame(null)">My games</md-button>
+<md-button class="btn btn-success btn-lg" ng-click="DashC.setGameStateFilter('');DashC.setGame(null);DashC.resetPages()">All games</md-button>
+<md-button class="btn btn-warning btn-lg" ng-click="DashC.setGameStateFilter('playing');DashC.setGame(null);DashC.resetPages()">Spectate</md-button>
+<md-button class="btn btn-danger btn-lg" ng-click="DashC.setGameStateFilter('finished');DashC.setGame(null);DashC.resetPages()">Finished</md-button>
+<md-button class="btn btn-info btn-lg" ng-click="DashC.setGameStateFilter(username);DashC.setGame(null);DashC.resetPages()">My games</md-button>
     <md-content layout="row" layout-xs="column">
                         <div layout="column" flex>
                             <md-table-container>

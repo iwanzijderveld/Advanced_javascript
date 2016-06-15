@@ -33,6 +33,9 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
         limit: 10,
         page: 1
     };
+    self.resetPages = function () {
+        self.query.page = 1;
+    };
 
     self.toggleLimitOptions = function () {
         self.limitOptions = self.limitOptions ? undefined : [5, 10, 15];
@@ -41,11 +44,9 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
     self.onPaginate = function (page, limit) {
         console.log('Scope Page: ' + self.query.page + ' Scope Limit: ' + self.query.limit);
         console.log('Page: ' + page + ' Limit: ' + limit);
-        /* self.promise = $timeout(function () {
-         }, 2000);
-         */
-        self.query.page++;
-        self.promise = self.getGames();
+        self.promise = $timeout(function () {
+        }, 2000);
+
     };
 
     self.logOrder = function (order) {
@@ -63,12 +64,12 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
     DashBoardService.gameStates(function (result) {
         if (result.statusText == 'OK') {
             self.total = result.data[0].count + result.data[1].count + result.data[2].count;
-            console.log(self.total);
+            console.log(total);
         }
     });
 
     self.getGames = function () {
-        DashBoardService.getGames(self.query.limit, self.query.page, function (result) {
+        DashBoardService.getGames(self.total, self.query.page, function (result) {
             if (result.statusText == 'OK') {
                 self.games = result.data;
                 console.log(self.games);
