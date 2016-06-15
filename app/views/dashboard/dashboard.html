@@ -45,10 +45,10 @@
     </md-tab>
   </md-tabs>-->
   
-<md-button class="btn btn-success btn-lg" ng-click="setGameStateFilter('')">All games</md-button>
-<md-button class="btn btn-warning btn-lg" ng-click="setGameStateFilter('playing')">Spectate</md-button>
-<md-button class="btn btn-danger btn-lg" ng-click="setGameStateFilter('finished')">Finished</md-button>
-<md-button class="btn btn-info btn-lg" ng-click="setGameStateFilter(username)">My games</md-button>
+<md-button class="btn btn-success btn-lg" ng-click="setGameStateFilter('');DashC.setGame(null)">All games</md-button>
+<md-button class="btn btn-warning btn-lg" ng-click="setGameStateFilter('playing');DashC.setGame(null)">Spectate</md-button>
+<md-button class="btn btn-danger btn-lg" ng-click="setGameStateFilter('finished');DashC.setGame(null)">Finished</md-button>
+<md-button class="btn btn-info btn-lg" ng-click="setGameStateFilter(username);DashC.setGame(null)">My games</md-button>
     <md-content md-theme="dashboard" layout="row" layout-xs="column">
                         <div layout="column" flex>
                             <md-table-container>
