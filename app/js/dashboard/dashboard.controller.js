@@ -1,13 +1,14 @@
-module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScope,$scope) {
+module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScope) {
     var self = this;
     self.games = {};
     self.game = {};
+    $rootScope.playing = false;
 
-    $scope.setGameStateFilter = function(gameState){
-        $scope.gameStateFilter = gameState;
+    self.setGameStateFilter = function (gameState) {
+        self.gameStateFilter = gameState;
     }
 
-    $scope.options = {
+    self.options = {
         rowSelection: false,
         multiSelect: false,
         autoSelect: false,
@@ -18,47 +19,48 @@ module.exports = function (DashBoardService, $mdToast, $state, Socket, $rootScop
         pageSelect: false
     };
 
-    $scope.selected = [];
-    $scope.limitOptions = [5, 10, 15,{
+    self.selected = [];
+    self.limitOptions = [5, 10, 15, {
         label: 'All',
         value: function () {
-          return self.games ? self.games.length : 0;
+            return self.games ? self.games.length : 0;
         }
     }];
 
-    $scope.query = {
+    self.query = {
         order: '-createdOn',
         limit: 10,
         page: 1
     };
-    
-    $scope.toggleLimitOptions = function () {
-        $scope.limitOptions = $scope.limitOptions ? undefined : [5, 10, 15];
-    };
-    
-    $scope.onPaginate = function(page, limit) {
-        console.log('Scope Page: ' + $scope.query.page + ' Scope Limit: ' + $scope.query.limit);
-        console.log('Page: ' + page + ' Limit: ' + limit);
-        $scope.promise = $timeout(function () {
-        }, 2000);
+
+    self.toggleLimitOptions = function () {
+        self.limitOptions = self.limitOptions ? undefined : [5, 10, 15];
     };
 
-    $scope.logOrder = function (order) {
+    self.onPaginate = function (page, limit) {
+        console.log('Scope Page: ' + self.query.page + ' Scope Limit: ' + self.query.limit);
+        console.log('Page: ' + page + ' Limit: ' + limit);
+        /* self.promise = $timeout(function () {
+         }, 2000);
+         */
+        self.promise = self.getGames();
+    };
+
+    self.logOrder = function (order) {
         console.log('order: ', order);
     };
-    
-    $scope.log = function (item) {
+
+    self.log = function (item) {
         console.log(item.name, 'was selected');
     };
 
-    $scope.playing = false;
     self.setGame = function (game) {
         //Parse the whole JSON object
         self.game = game;
     };
 
     self.getGames = function () {
-        DashBoardService.getGames(function (result) {
+        DashBoardService.getGames(self.query.limit, self.query.page, function (result) {
             if (result.statusText == 'OK') {
                 self.games = result.data;
                 console.log(self.games);
