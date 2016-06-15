@@ -45,15 +45,15 @@
     </md-tab>
   </md-tabs>-->
   
-<md-button class="btn btn-success btn-lg" ng-click="setGameStateFilter('');DashC.setGame(null)">All games</md-button>
-<md-button class="btn btn-warning btn-lg" ng-click="setGameStateFilter('playing');DashC.setGame(null)">Spectate</md-button>
-<md-button class="btn btn-danger btn-lg" ng-click="setGameStateFilter('finished');DashC.setGame(null)">Finished</md-button>
-<md-button class="btn btn-info btn-lg" ng-click="setGameStateFilter(username);DashC.setGame(null)">My games</md-button>
+<md-button class="btn btn-success btn-lg" ng-click="DashC.setGameStateFilter('');DashC.setGame(null)">All games</md-button>
+<md-button class="btn btn-warning btn-lg" ng-click="DashC.setGameStateFilter('playing');DashC.setGame(null)">Spectate</md-button>
+<md-button class="btn btn-danger btn-lg" ng-click="DashC.setGameStateFilter('finished');DashC.setGame(null)">Finished</md-button>
+<md-button class="btn btn-info btn-lg" ng-click="DashC.setGameStateFilter(username);DashC.setGame(null)">My games</md-button>
     <md-content md-theme="dashboard" layout="row" layout-xs="column">
                         <div layout="column" flex>
                             <md-table-container>
-                            <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">
-                                <thead ng-if="!options.decapitate" md-head data-md-order="query.order" md-on-reorder="logOrder">
+                            <table data-md-table data-md-row-select="DashC.options.rowSelection" multiple="DashC.options.multiSelect" data-ng-model="DashC.selected" md-progress="DashC.promise">
+                                <thead ng-if="!DashC.options.decapitate" md-head data-md-order="DashC.query.order" md-on-reorder="DashC.logOrder">
                                     <tr md-row>
                                         <th md-column md:order:by="createdBy"><span>Door</span></th>
                                         <th md-column md:order:by="state"><span>Status</span></th>
@@ -62,7 +62,7 @@
                                     </tr>
                                 </thead>
                                 <tbody md-body>
-                                    <tr ng-click="DashC.setGame(game)" md-row md-select="game" md-select-id="createdOn" data-md-on-select="log" md-on-deselect="deselect" x-md-auto-select="options.autoSelect"  data-ng-repeat="game in DashC.games | filter:gameStateFilter | orderBy: query.order | limitTo: query.limit : (query.page - 1) * query.limit">
+                                    <tr ng-click="DashC.setGame(game)" md-row md-select="game" md-select-id="createdOn" data-md-on-select="log" md-on-deselect="deselect" x-md-auto-select="DashC.options.autoSelect"  data-ng-repeat="game in DashC.games | filter:DashC.gameStateFilter | orderBy: DashC.query.order | limitTo: DashC.query.limit : (DashC.query.page - 1) * DashC.query.limit">
                                         <td md-cell>{{game.createdBy._id}}<br /> {{game.createdBy.name}}</td>
                                         <td md-cell>{{game.state}}</td>
                                         <td md-cell>{{game.gameTemplate.id}}</td>
@@ -71,7 +71,7 @@
                                 </tbody>
                             </table>
                         </md-table-container>
-                            <data-md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{DashC.games.length}}" md-on-paginate="onPaginate" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks"></data-md-table-pagination>
+                            <data-md-table-pagination md-limit="DashC.query.limit" md-limit-options="DashC.limitOptions" md-page="DashC.query.page" md-total="{{DashC.games.length}}" md-on-paginate="DashC.onPaginate" md-page-select="DashC.options.pageSelect" md-boundary-links="DashC.options.boundaryLinks"></data-md-table-pagination>
                         </div>
                         <div layout="column" flex ng-if="DashC.game.id != undefined">
                             <md-card>

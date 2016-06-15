@@ -28,8 +28,8 @@ module.exports = function ($http, APIService) {
      * gameTemplate: filter game template
      * state: game state filter
      */
-    service.getGames = function (callback) {
-        $http.get(APIService.games())
+    service.getGames = function (pageSize, pageIndex, callback) {
+        $http.get(APIService.games(), {pageSize: pageSize, pageIndex: pageIndex})
             .then(function (response) {
                 callback(response);
             }, function (error) {
