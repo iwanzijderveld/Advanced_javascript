@@ -47,12 +47,13 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
   };
 
   $scope.selected = [];
-  $scope.limitOptions = [5, 10, 15, {
-    label: 'All',
-    value: function () {
-      return $scope.DashC.games ? $scope.DashC.games.length : 0;
-    }
-  }];
+  $scope.limitOptions = [5, 10, 15
+//   , {
+//     label: 'All',
+//     value: function () {
+//       return $scope.DashC.games ? $scope.DashC.games.length : 0;
+//     }}
+];
 
   $scope.query = {
     order: 'createdOn',
