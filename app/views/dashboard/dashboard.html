@@ -77,7 +77,7 @@
                             <md-card>
                                 <md-card-title>{{DashC.game.id}}</md-card-title>
                                 <md-card-actions layout="row" layout-align="end center">
-                                    <md-button ng-click="DashC.joinGame(DashC.game.id)" ng-disabled="DashC.game.createdBy._id==username" ng-if="DashC.game.id != undefined && DashC.game.state == 'open'" class="md-raised md-accent">Join</md-button>
+                                    <md-button ng-click="DashC.joinGame(DashC.game.id)" ng-disabled="DashC.playerExists(DashC.game,username)" ng-if="DashC.game.id != undefined && DashC.game.state == 'open'" class="md-raised md-accent">Join</md-button>
                                     <md-button ng-click="DashC.startGame(DashC.game.id)" ng-disabled="DashC.game.createdBy._id!=username" ng-if="DashC.game.id != undefined && DashC.game.state == 'open'" class="md-raised md-accent">Start</md-button>
                                     <md-button ng-click="DashC.playGame(DashC.game.id)" ng-disabled="!DashC.playerExists(DashC.game,username)" ng-if="DashC.game.id != undefined && DashC.game.state == 'playing'" class="md-raised md-accent">Play</md-button>
                                     <md-button ng-click="DashC.spectateGame(DashC.game.id)" ng-disabled="DashC.playerExists(DashC.game,username)" ng-if="DashC.game.id != undefined && DashC.game.state == 'playing' || DashC.game.state == 'finished'" class="md-raised md-accent">Spectate</md-button>

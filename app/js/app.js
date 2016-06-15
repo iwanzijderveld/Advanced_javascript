@@ -63,11 +63,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdT
         });
 
     $mdThemingProvider.theme('gameBoard')
-        .primaryPalette('orange')
-        .accentPalette('red')
+        .primaryPalette('green')
+        .accentPalette('brown')
         .backgroundPalette('deep-orange',
         {
-            'default': 'A200'
+            'default': '300'
         });
 
     //$mdThemingProvider.setDefaultTheme('default');
