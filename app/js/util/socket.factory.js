@@ -11,7 +11,11 @@ module.exports = function ($mdToast, $state) {
         });
 
         socket.on('end', function () {
-            $mdToast.show($mdToast.simple().textContent("Game ended"));
+            $mdToast.show($mdToast.simple().textContent("Game ended").action('LEAVE').highlightAction(true)).then(function (response) {
+                if (response == 'ok') {
+                    $state.go('app.dashboard');
+                }
+            });
             // optie om naar dashboard te gaan?
         });
 

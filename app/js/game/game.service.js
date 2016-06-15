@@ -23,7 +23,7 @@ module.exports = function ($http, APIService) {
     // Get matched tiles 
     service.getMatchedTiles = function (id, callback) {
         console.log("Get matched tiles");
-        $http.get(APIService.tileMatch(id))
+        $http.get(APIService.matchedTiles(id))
             .then(function (result) {
                 callback(result);
             }, function (error) {

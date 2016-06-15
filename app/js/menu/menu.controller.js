@@ -1,12 +1,12 @@
-module.exports = function ($scope, AuthenticationService, DashBoardService, $mdToast, $mdDialog) {
+module.exports = function ($scope, AuthenticationService, DashBoardService, $mdToast, $mdDialog, $window) {
 
-  $scope.limitOptions = [5, 10, 15];
-  
-  $scope.query = {
-    // order: 'name',
-    limit: 5,
-    page: 1
-  };
+    $scope.limitOptions = [5, 10, 15];
+
+    $scope.query = {
+        // order: 'name',
+        limit: 5,
+        page: 1
+    };
 
     this.self = this;
 
@@ -38,6 +38,52 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
         }
     ];
 
+    //Start dataTable
+  $scope.setGameStateFilter = function(gameState){
+    $scope.gameStateFilter = gameState;
+  }
+
+  $scope.options = {
+    rowSelection: false,
+    multiSelect: false,
+    autoSelect: false,
+    decapitate: false,
+    largeEditDialog: false,
+    boundaryLinks: false,
+    limitSelect: true,
+    pageSelect: false
+  };
+
+  $scope.selected = [];
+  $scope.limitOptions = [5, 10, 15, {
+    label: 'All',
+    value: function () {
+      return $scope.DashC.games ? $scope.DashC.games.length : 0;
+    }
+  }];
+
+  $scope.query = {
+    order: 'createdOn',
+    limit: 10,
+    page: 1
+  };
+ 
+  $scope.toggleLimitOptions = function () {
+    $scope.limitOptions = $scope.limitOptions ? undefined : [5, 10, 15];
+  };
+  
+  $scope.onPaginate = function(page, limit) {
+    console.log('Scope Page: ' + $scope.query.page + ' Scope Limit: ' + $scope.query.limit);
+    console.log('Page: ' + page + ' Limit: ' + limit);
+    $scope.promise = $timeout(function () {
+    }, 2000);
+  };
+
+  $scope.log = function (item) {
+    console.log(item.name, 'was selected');
+  };
+  //End dataTable
+
     for (i = this.self.minPlayers; i < this.self.maxPlayers + 1; i++) {
         this.self.players.push(i);
     }
@@ -58,7 +104,7 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
     this.self.showAddGame = function () {
         $mdDialog.show({
             templateUrl: 'views/dashboard/add_game.html',
-            controller: 'IndexController as IndexC',
+            controller: 'MenuController as MenuC',
             parent: angular.element(document.body),
             clickOutsideToClose: false
         });
@@ -82,7 +128,7 @@ module.exports = function ($scope, AuthenticationService, DashBoardService, $mdT
                 console.log(result.data);
                 $mdToast.show($mdToast.simple().textContent('Nieuwe game aangemaakt'));
                 $mdDialog.hide();
-                $state.go('app.dashboard');
+                $window.location.reload();
             }
             else {
                 console.log(result);

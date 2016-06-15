@@ -11,7 +11,7 @@ module.exports = function ($location, AuthenticationService, $mdDialog) {
         console.log('show dialog')
         $mdDialog.show({
             templateUrl: 'views/login/login.html',
-            controller: 'IndexController as IndexC',
+            controller: 'MenuController as MenuC',
             parent: angular.element(document.body),
             clickOutsideToClose: false
         });

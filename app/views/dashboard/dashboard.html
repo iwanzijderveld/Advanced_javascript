@@ -44,39 +44,56 @@
         </md-tabs>
     </md-tab>
   </md-tabs>-->
-
-<md-content layout="column" flex>
-      
   
-      <md-card>
-        <md-toolbar class="md-table-toolbar md-default">
-          <div class="md-toolbar-tools">
-            <div flex></div>
-            <md-button class="md-icon-button">
-              <md-icon>refresh</md-icon>
-            </md-button>
-          </div>
-        </md-toolbar>
-        
-        <md-table-container>
-          <table md-table>
-            <thead md-head md-order="query.order">
-              <tr md-row>
-                <th md-column><span>Dessert (100g serving)</span></th>
-                <th md-column><span>Type</span></th>
-                <th md-column><span>Calories</span></th>
-              </tr>
-            </thead>
-            <tbody md-body>
-              <tr md-row md-select="game" md-on-select="logItem" md-auto-select="options.autoSelect" ng-disabled="dessert.calories.value > 400" ng-repeat="game in DashC.games | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-                <td md-cell>{{game.createdBy.name}}</td>
-                <td md-cell>{{game.state.id}}</td>
-                <td md-cell>{{game.gameTemplate.id}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </md-table-container>
-
-        <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{desserts.count}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
-      </md-card>
-    </md-content>
+<md-button class="btn btn-success btn-lg" ng-click="setGameStateFilter('open')">Open games</md-button>
+<md-button class="btn btn-warning btn-lg" ng-click="setGameStateFilter('playing')">Spectate</md-button>
+<md-button class="btn btn-danger btn-lg" ng-click="setGameStateFilter('finished')">Finished</md-button>
+<md-button class="btn btn-info btn-lg" ng-click="setGameStateFilter(username)">My games</md-button>
+    <md-content md-theme="dashboard" layout="row" layout-xs="column">
+                        <div layout="column" flex>
+                            <md-table-container>
+                            <table data-md-table data-md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" data-ng-model="selected" md-progress="promise">
+                                <thead ng-if="!options.decapitate" md-head data-md-order="query.order" md-on-reorder="onReorder">
+                                    <tr md-row>
+                                        <th md-column md:order:by="createdBy"><span>Door</span></th>
+                                        <th md-column></th>
+                                        <th md-column md:order:by="state"><span>Status</span></th>
+                                        <th md-column data-md-numeric data-md-order-by="gameTemplate.id"><span>Template</span></th>
+                                        <th md-column data-md-numeric data-md-order-by="createdOn" data-md-desc><span>Datum</span></th>
+                                        <th md-column data-md-numeric data-md-order-by="action"><span>Actie</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody md-body>
+                                    <tr ng-click="DashC.setGame(game)" md-row md-select="game" md-select-id="createdOn" data-md-on-select="log" md-on-deselect="deselect" x-md-auto-select="options.autoSelect"  data-ng-repeat="game in DashC.games | filter:gameStateFilter | orderBy: query.order | limitTo: query.limit : (query.page - 1) * query.limit">
+                                        <td md-cell>{{game.createdBy._id}}</td>
+                                        <td md-cell>{{game.createdBy.name}}</td>
+                                        <td md-cell>{{game.state}}</td>
+                                        <td md-cell>{{game.gameTemplate.id}}</td>
+                                        <td md-cell>{{game.createdOn | date:'yyyy-MM-dd HH:mm'}}</td>
+                                        <td md-cell><md-button ng-click="DashC.joinGame(game.id)" ng-if="game.state=='open' && lobby.allPlayers==false" class="md-raised md-accent">Join</md-button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </md-table-container>
+                            <data-md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{DashC.games.length}}" md-on-paginate="onPaginate" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks"></data-md-table-pagination>
+                        </div>
+                        <div layout="column" flex ng-if="DashC.game.id != undefined">
+                            <md-card>
+                                <md-card-title>{{DashC.game.id}}</md-card-title>
+                                <md-card-actions layout="row" layout-align="end center">
+                                    <md-button ng-click="DashC.startGame(DashC.game.id)" ng-if="DashC.game.id != undefined && DashC.game.state == 'open'  && lobby.allPlayers==false" class="md-raised md-accent">Start</md-button>
+                                    <md-button ng-click="DashC.playGame(DashC.game.id)" ng-if="DashC.game.id != undefined && DashC.game.state == 'playing'  && lobby.allPlayers==false" class="md-raised md-accent">Play</md-button>
+                                    <md-button ng-click="DashC.spectateGame(DashC.game.id)" ng-if="DashC.game.id != undefined && DashC.game.state == 'playing'  && lobby.allPlayers==true" class="md-raised md-accent">Spectate</md-button>
+                                </md-card-actions>
+                            </md-card>
+                            <md-list>
+                                <md-list-item class="md-3-line" ng-repeat="player in DashC.game.players">
+                                    <div class="md-list-item-text">
+                                        <h4>{{player.name}}</h4>
+                                    </div>
+                                    <md-divider ng-if="!$last"></md-divider>
+                                </md-list-item>
+                            </md-list>
+                        </div>
+                    </md-content>
+</md-content>
